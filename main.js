@@ -1,6 +1,8 @@
-/* IMPORTAÇÃO DAS BIBLIOTECAS EXPRESS, BCRYPT, PATH, CORS, EXPRESS-SESSION */
+/* IMPORTAÇÃO DAS BIBLIOTECAS EXPRESS, BCRYPT, PATH, CORS, EXPRESS-SESSION, PYTHON-SHELL */
 const express = require("express");
 const app = express();
+const { PythonShell } = require("python-shell");
+const pyshell = new PythonShell("script.py");
 const bcrypt = require("bcryptjs");
 const path = require("path");
 const cors = require("cors");
@@ -24,6 +26,12 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+
+/* TESTE PYTHON */
+
+PythonShell.run("script.py").then((messages) => {
+  console.log(messages);
+});
 
 /* ROTA PRINCIPAL (HOME PAGE, FUTURO INDEX.HTML (EJS)*/
 
