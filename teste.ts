@@ -1,2 +1,3 @@
-let msg: string = 'Hello, World';
-console.log(msg);
+let nome: string = 'João';
+
+console.log(nome);
