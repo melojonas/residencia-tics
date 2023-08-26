@@ -29,12 +29,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-/* TESTE PYTHON */
-
-PythonShell.run("script.py").then((messages) => {
-  console.log(messages);
-});
-
 /* ROTA PRINCIPAL (HOME PAGE, FUTURO INDEX.HTML (EJS)*/
 
 app.get("/", (req, res) => {
