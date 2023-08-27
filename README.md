@@ -2,7 +2,7 @@
 
 Bem-vindo ao repositório do nosso sistema! Este documento irá guiá-lo nas políticas de contribuição. Sua contribuição é fundamental para o sucesso deste projeto, então vamos começar!
 
-## Funcionamento do Trabalho Colaborativo
+## Desenvolvimento Colaborativo no GitHub
 
 Nós adotamos um fluxo de trabalho baseado no modelo de *branching* (ramificação) para facilitar o desenvolvimento colaborativo. O fluxo geral inclui os seguintes passos:
 
