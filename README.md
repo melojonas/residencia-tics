@@ -1,7 +1,7 @@
 # Sistema de Gerenciamento Escolar - README
 
-1. Árvore do Repositório
-2. Desenvolvimento Colaborativo no GitHub
+1. [Árvore do Repositório](https://github.com/melojonas/residencia-tics/tree/main#%C3%A1rvore-do-reposit%C3%B3rio)
+2. [Desenvolvimento Colaborativo no GitHub](https://github.com/melojonas/residencia-tics/tree/main#desenvolvimento-colaborativo-no-github)
 
 ## Árvore do Repositório
 
