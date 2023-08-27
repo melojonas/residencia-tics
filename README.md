@@ -1,6 +1,45 @@
 # Sistema de Gerenciamento Escolar - README
 
-Bem-vindo ao repositório do nosso sistema! Este documento irá guiá-lo nas políticas de contribuição. Sua contribuição é fundamental para o sucesso deste projeto, então vamos começar!
+1. Árvore do Repositório
+2. Desenvolvimento Colaborativo no GitHub
+
+## Árvore do Repositório
+
+```
+residencia-tics
+├─ .gitignore
+├─ client
+│  ├─ public
+│  │  ├─ assets
+│  │  │  ├─ images
+│  │  │  └─ plugins
+│  │  ├─ css
+│  │  │  └─ style.css
+│  │  └─ js
+│  │     └─ script.js
+│  └─ src
+│     ├─ App.js
+│     ├─ components
+│     ├─ index.js
+│     ├─ pages
+│     │  ├─ index.ejs
+│     │  └─ partials
+│     │     └─ header.ejs
+│     └─ services
+├─ package-lock.json
+├─ package.json
+├─ README.md
+└─ server
+   ├─ app.js
+   ├─ config
+   │  ├─ database.js
+   │  └─ server.js
+   ├─ controllers
+   ├─ index.js
+   ├─ models
+   └─ routes
+
+```
 
 ## Desenvolvimento Colaborativo no GitHub
 
