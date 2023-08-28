@@ -31,7 +31,7 @@ app.use(cors());
 
 /* TESTE PYTHON */
 
-PythonShell.run("script.py").then((messages) => {
+PythonShell.run("Python.py").then((messages) => {
   console.log(messages);
 });
 
