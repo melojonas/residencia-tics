@@ -18,10 +18,10 @@ residencia-tics
 │  │  └─ js
 │  │     └─ script.js
 │  └─ src
-│     ├─ App.js
-│     ├─ components
+│     ├─ app.js
+│     ├─ Components
 │     ├─ index.js
-│     ├─ pages
+│     ├─ views
 │     │  ├─ index.ejs
 │     │  └─ partials
 │     │     └─ header.ejs
@@ -30,7 +30,7 @@ residencia-tics
 ├─ package.json
 ├─ README.md
 └─ server
-   ├─ app.js
+   ├─ main.js
    ├─ config
    │  ├─ database.js
    │  └─ server.js
