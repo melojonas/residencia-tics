@@ -5,35 +5,60 @@ const flash = require("flash");
 const validator = require("validator");
 const path = require("path");
 const cors = require("cors");
-
+const pg = require("pg");
+const session = require('express-session');
+const PostgresSession = require('connect-pg-simple')(session);
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 /* MIDDLEWARES */
 const app = express();
 
+// Configurando a sessão
+const pgPool = new pg.Pool({ // TODO: criar variáveis de ambiente para as configurações do banco de dados
+    user: DB_USER,
+    password: DB_PASS,
+    host: DB_HOST,
+    port: DB_PORT,
+    database: DB_NAME
+});
+
 app.use(
   session({
-    secret: "CHRJFfs%#kpRu4VgeR8xN8pyKEpDaHrf#!9&8QTQA",
+    store: new PostgresSession({
+      pool: pgPool,
+      tableName: "session" // TODO: criar tabela para armazenar sessões
+    }),
+    secret: process.env.SESSION_SECRET, // TODO: criar variável de ambiente para a secret
     secure: false,
     resave: false,
-    saveUninitialized: false, // TODO: perguntar se o usuário quer usar cookies antes (LGPD)
-    cookie: { maxAge: 60000000 }
+    saveUninitialized: false,
+    cookie: { cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } } // 30 dias
   })
 );
+
+// Inicializando o passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set("view engine", "ejs");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.bodyParser());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.methodOverride()); // RESTfull (PUT e DELETE)
+/* app.use(express.methodOverride()); // RESTfull (PUT e DELETE) */ 
 app.use(express.static('../client/public'));
 
-// inicializando o passport
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(function(req, res, next) {
+  var msgs = req.session.messages || [];
+  res.locals.messages = msgs;
+  res.locals.hasMessages = !! msgs.length;
+  req.session.messages = [];
+  next();
+});
+app.use(function(req, res, next) {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 /* ROTAS */
 
@@ -44,32 +69,22 @@ app.use('/auth', authRoutes);
 
 /* ERROR HANDLER */
 
+// Catch 404
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 /* AUTENTICAÇÃO DE USUÁRIO */
-
-// Estratégia de autenticação local
-passport.use(new LocalStrategy(
-  (username, password, done) => {
-    const user = User.findByUsername(username);
-
-    if (!user || user.password !== password) {
-      return done(null, false, { message: 'Nome de usuário ou senha incorreto.' });
-    }
-
-    return done(null, user);
-  }
-));
-
-// Serialização do usuário
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  const user = User.findById(id);
-  done(null, user);
-});
 
 // Middleware de autenticação
 function isAuthenticated(req, res, next) {
@@ -79,9 +94,4 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-// Logout
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/paginainicial'); // TODO: mudar para a página inicial do site
-});
-
+module.export = app;

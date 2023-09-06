@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sistema de Gestão Acadêmica</title>
+		<link rel="stylesheet" href="/css/base.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/login.css">
+	</head>
+	<body>
+		<section class="prompt">
+			<h3>Sistema de Gestão Acadêmica</h3>
+			<h1>Sign in</h1>
+			<% if (hasMessages) { %>
+			<section class="messages">
+				<% messages.forEach(function(message) { %>
+				<p><%= message %></p>
+				<% }); %>
+			</section>
+			<% } %>
+			<form action="/login/password" method="post">
+				<section>
+					<label for="username">Nome de usuário</label>
+					<input id="username" name="username" type="text" autocomplete="username" required autofocus>
+				</section>
+				<section>
+					<label for="current-password">Senha</label>
+					<input id="current-password" name="password" type="password" autocomplete="current-password" required>
+				</section>
+				<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+				<button type="submit">Entrar</button>
+			</form>
+			<hr>
+			<p class="help">Não tem uma conta? <a href="/signup">Cadastrar</a></p>
+		</section>
+		<footer class="info">
+			<p>Criado por <a href="#">Grupo Manhattan</a></p>
+			<p>Parte do <a href="https://gestaoacademica.azurewebsites.net">Sistema de Gestão Acadêmica</a></p>
+		</footer>
+	</body>
+</html>
