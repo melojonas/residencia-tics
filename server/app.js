@@ -23,7 +23,6 @@ dotenv.config();
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", '../client/src/views');
 
 app.use(cors());
 app.use(express.json());
@@ -54,23 +53,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next) { // Middleware para mensagens flash
-  var msgs = req.session.messages || [];
-  res.locals.messages = msgs;
-  res.locals.hasMessages = !! msgs.length;
-  req.session.messages = [];
-  next();
-});
-app.use(function(req, res, next) { // Middleware para CSRF
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
-
 /* ROTAS */
 
 // Rota para home
-const indexRoutes = require('./routes/index');
-app.use('/', indexRoutes);
+app.get('/', function(req, res, next) {
+  res.type('text/plain')
+    .status(200)
+    .send('Homepage');
+});
 
 // Rota para login
 const authRoutes = require('./routes/auth');
@@ -137,4 +127,4 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-module.export = app;
+module.exports = app;

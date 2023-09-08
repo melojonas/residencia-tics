@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
-// Rota para index.html in /client
 router.get('/', function(req, res, next) {
-    res.render('index');
+    res .type('text/plain')
+        .status(200)
+        .send('Homepage')
 });
 
 module.exports = router;

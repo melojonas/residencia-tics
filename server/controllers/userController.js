@@ -6,7 +6,7 @@
  */
 
 
-const db = require('../db/users');
+const db = require('../db/users.js');
 const User = require('../models/User');
 
 async function createUser(username, password) {
