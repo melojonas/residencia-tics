@@ -70,6 +70,21 @@ app.use('/auth', authRoutes);
 
 /* ERROR HANDLER */
 
+// 404 handler and pass to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  // Set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // Render the error page
+  res.status(err.status || 500);
+  res.send(err);
+});
 
 /* AUTENTICAÇÃO DE USUÁRIO */
 
