@@ -19,12 +19,15 @@ const ejs = require('ejs');
 const pgSession = require('connect-pg-simple')(session);
 const LocalStrategy = require('passport-local').Strategy;
 
+// path para root do projeto
+global.__root = path.resolve(__dirname, '..');
+
 /* MIDDLEWARES */
 dotenv.config();
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", '../client/src/views');
+app.set("views", path.join(__root + '/client/src/views'));
 
 app.use(cors());
 app.use(express.json());
@@ -32,7 +35,7 @@ app.use(helmet());
 app.use(morgan('dev')); // TODO: Change to 'combined' for production
 app.use(bodyparser.json( { extended: true } ));
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(express.static('../client/public'));
+app.use(express.static(path.join(__root + '/client/public')));
 
 // Configurando a sessão
 const pgPool = new pg.Pool();
@@ -61,7 +64,7 @@ app.use(passport.session());
 app.get('/', (req, res) => res.render('index'));
 
 // Rota para login
-const authRoutes = require('./routes/auth');
+const authRoutes = require(path.join(__dirname + '/routes/auth'));
 app.use('/auth', authRoutes);
 
 
