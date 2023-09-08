@@ -1,34 +1,48 @@
 /* DEPENDÊNCIAS */
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const flash = require("flash");
-const validator = require("validator");
-const path = require("path");
-const cors = require("cors");
+const express = require('express');
+const dotenv = require('dotenv');
+const bodyparser = require('body-parser');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const passport = require('passport');
 const pg = require("pg");
 const session = require('express-session');
-const PostgresSession = require('connect-pg-simple')(session);
-const passport = require('passport');
+const flash = require('flash');
+const validator = require('validator');
+const path = require('path');
+const cors = require('cors');
+const bcrypt = require("bcrypt");
+const createError = require('http-errors');
+
+// dependências para autenticação e sessão
+const pgSession = require('connect-pg-simple')(session);
+const LocalStrategy = require('passport-local').Strategy;
 
 /* MIDDLEWARES */
+dotenv.config();
 const app = express();
 
+app.set("view engine", "ejs");
+app.set("views", '../client/src/views');
+
+app.use(cors());
+app.use(express.json());
+app.use(helmet());
+app.use(morgan('dev')); // TODO: Change to 'combined' for production
+app.use(bodyparser.json( { extended: true } ));
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.static('../client/public'));
+
 // Configurando a sessão
-const pgPool = new pg.Pool({ // TODO: criar variáveis de ambiente para as configurações do banco de dados
-    user: DB_USER,
-    password: DB_PASS,
-    host: DB_HOST,
-    port: DB_PORT,
-    database: DB_NAME
-});
+const pgPool = new pg.Pool();
 
 app.use(
   session({
-    store: new PostgresSession({
+    store: new pgSession({
       pool: pgPool,
-      tableName: "session" // TODO: criar tabela para armazenar sessões
+      tableName: "session" // script para criar a tabela: node_modules/connect-pg-simple/table.sql
     }),
-    secret: process.env.SESSION_SECRET, // TODO: criar variável de ambiente para a secret
+    secret: process.env.SESSION_SECRET,
     secure: false,
     resave: false,
     saveUninitialized: false,
@@ -40,27 +54,23 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set("view engine", "ejs");
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-/* app.use(express.methodOverride()); // RESTfull (PUT e DELETE) */ 
-app.use(express.static('../client/public'));
-
-app.use(function(req, res, next) {
+app.use(function(req, res, next) { // Middleware para mensagens flash
   var msgs = req.session.messages || [];
   res.locals.messages = msgs;
   res.locals.hasMessages = !! msgs.length;
   req.session.messages = [];
   next();
 });
-app.use(function(req, res, next) {
+app.use(function(req, res, next) { // Middleware para CSRF
   res.locals.csrfToken = req.csrfToken();
   next();
 });
 
 /* ROTAS */
+
+// Rota para home
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
 
 // Rota para login
 const authRoutes = require('./routes/auth');
@@ -86,7 +96,40 @@ app.use(function(err, req, res, next) {
 
 /* AUTENTICAÇÃO DE USUÁRIO */
 
-// Middleware de autenticação
+// Configure Passport.js with Local Strategy
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await userController.findUserByUsername(username);
+
+      if (!user) {
+        return done(null, false, { message: 'E-mail ou senha incorreto' });
+      }
+
+      if (!bcrypt.compareSync(password, user.password)) {
+        return done(null, false, { message: 'E-mail ou senha incorreto' });
+      }
+
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
+  })
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await userController.findUserById(id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
+});
+
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
