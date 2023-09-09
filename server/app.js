@@ -64,9 +64,9 @@ app.use(passport.session());
 app.get('/', (req, res) => res.render('index'));
 
 // Rota para login
-const authRoutes = require(path.join(__dirname + '/routes/auth'));
-app.use('/auth', authRoutes);
-
+app.get('/login', (req, res) => res.render('login'));
+/* const authRoutes = require(path.join(__dirname + '/routes/auth'));
+app.use('/auth', authRoutes); */
 
 /* ERROR HANDLER */
 

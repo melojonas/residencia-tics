@@ -9,28 +9,28 @@
 const db = require('../db/users.js');
 const User = require('../models/User');
 
-async function createUser(username, password) {
-  const newUser = new User(username, password);
-  const result = await db.createUser(newUser.username, newUser.password);
+async function createUser(email, password) {
+  const newUser = new User(email, password);
+  const result = await db.createUser(newUser.email, newUser.password);
 
   return result;
 }
 
-async function findUserByUsername(username) {
-  const result = await db.findUserByUsername(username);
+async function findUserByEmail(email) {
+  const result = await db.findUserByEmail(email);
 }
 
-async function updateUser(id, username, password) {
-  const result = await db.updateUser(id, username, password);
+async function updateUser(email, password) {
+  const result = await db.updateUser(email, password);
 }
 
-async function deleteUser(id) {
-  const result = await db.deleteUser(id);
+async function deleteUser(email) {
+  const result = await db.deleteUser(email);
 }
 
 module.exports = {
   createUser,
-  findUserByUsername,
+  findUserByEmail,
   updateUser,
   deleteUser
 };

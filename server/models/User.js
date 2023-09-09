@@ -1,11 +1,18 @@
 /* Modelo de usuário */
 
-const bcrypt = require('bcrypt');
+class Usuario {
+  constructor(funcao, nome, email, senha) {
+    this.funcao = funcao;
+    this.nome = nome;
+    this.email = email;
+    this.senha = senha;
+    this.dataCadastro = new Date();
+    this.ativo = true;
+  }
 
-class User {
-  constructor(username, password) {
-    this.username = username;
-    this.password = password;
+  constructor(email, senha) {
+    this.email = email;
+    this.senha = senha;
   }
 }
 

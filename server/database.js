@@ -10,12 +10,12 @@ const config = {
     password: process.env.LOCAL_PASSWORD,
     port: process.env.LOCAL_PORT,
     host: process.env.LOCAL_HOST,
-    ssl: {
+    /* ssl: {
         require: true,
         rejectUnauthorized: false,
         key: fs.readFileSync(path.join(__dirname, '/certs/key.pem')).toString(),
         cert: fs.readFileSync(path.join(__dirname, '/certs/certificate.pem')).toString()
-    }
+    } */
 }
 
 const pool = new pg.Pool(config)
