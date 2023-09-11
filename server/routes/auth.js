@@ -25,7 +25,7 @@ const router = express.Router();
  *         content:
  *           text/html:
  */
-router.get('/login', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('login');
 });
 
@@ -63,8 +63,8 @@ router.get('/login', function(req, res, next) {
  *       "302":
  *         description: Redirect.
  */
-router.post('/login/password', passport.authenticate('local', {
-  successReturnToOrRedirect: '/',
+router.post('/', passport.authenticate('local', {
+  successRedirect: '/',
   failureRedirect: '/login',
   failureMessage: true
 }));
@@ -88,7 +88,7 @@ router.post('/logout', function(req, res, next) {
  * desired username and password.  When the user submits the form, a request
  * will be sent to the `POST /signup` route.
  */
-router.get('/signup', function(req, res, next) {
+router.get('/signup', function(req, res) {
   res.render('signup');
 });
 

@@ -61,12 +61,12 @@ app.use(passport.session());
 /* ROTAS */
 
 // Rota para home
-app.get('/', (req, res) => res.render('index'));
+const index = require(path.join(__dirname + '/routes/index'));
+app.use('/', index);
 
 // Rota para login
-app.get('/login', (req, res) => res.render('login'));
-/* const authRoutes = require(path.join(__dirname + '/routes/auth'));
-app.use('/auth', authRoutes); */
+const auth = require(path.join(__dirname + '/routes/auth'));
+app.use('/login', auth);
 
 /* ERROR HANDLER */
 
