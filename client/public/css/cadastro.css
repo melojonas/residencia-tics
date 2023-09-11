@@ -45,7 +45,7 @@ body {
     margin: 0 auto;
 }
 
-.container-login {
+.container-cadastro {
     width: 100%;
     min-height: 100vh;
     display: -webkit-box;
@@ -64,7 +64,7 @@ body {
     z-index: 1;
 }
 
-.container-login::before {
+.container-cadastro::before {
     content: "";
     display: block;
     position: absolute;
@@ -76,7 +76,7 @@ body {
     background-color: rgba(255,255,255,0.8);
 }
 
-.wrap-login {
+.wrap-cadastro {
     width: 500px;
     border-radius: 10px;
     overflow: hidden;
@@ -88,11 +88,11 @@ body {
     background: linear-gradient(top, #192bcf, #192bcf);
 }
 
-.login-form {
+.cadastro-form {
     width: 100%;
 }
 
-.login-form-logo {
+.cadastro-form-logo {
     font-size: 60px;
     color: #333333;
     display: -webkit-box;
@@ -120,7 +120,7 @@ body {
     content: url(../../public/img/RIOPREFEITURA.png);
 }
 
-.login-form-title {
+.cadastro-form-title {
     font-family: Poppins-Medium;
     font-size: 30px;
     color: #fff;
@@ -288,7 +288,7 @@ label {
     transform: translateY(-50%);
 }
 
-.container-login-form-btn {
+.container-cadastro-form-btn {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -299,7 +299,7 @@ label {
     justify-content: center;
 }
 
-.login-form-btn {
+.cadastro-form-btn {
     font-family: Poppins-Medium;
     font-size: 16px;
     color: #555555;
@@ -339,7 +339,7 @@ button, select {
     text-transform: none;
 }
 
-.login-form-btn::before {
+.cadastro-form-btn::before {
     content: "";
     display: block;
     position: absolute;

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="../../public/css/home.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="mobile-menu-button">
+                <button id="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+            <div class="topbar-content">
+                <p>Grupo Manhattan</p>
+                <img src="../../public/img/perfil-logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="main">
+            <nav class="sidebar">
+                <span class="home-logo">
+                    <i class="zmdi zmdi-landscape"></i>
+                </span>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Calendário</a></li>
+                    <li><a href="#">Notas</a></li>
+                    <li><a href="#">Atividades</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                </ul>
+            </nav>
+            <main class="content">
+                <h1>Bem-vindo à Página Principal</h1>
+                <p>Aqui você encontrará informações e recursos importantes.</p>
+            </main>
+        </div>
+    </div>
+    <script>
+        function toggleMenu() {
+            var sidebar = document.querySelector('.sidebar');
+            var content = document.querySelector('.content');
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';            
+        }
+    </script>
+</body>
+
+</html>

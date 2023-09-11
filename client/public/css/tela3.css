@@ -45,7 +45,7 @@ body {
     margin: 0 auto;
 }
 
-.container-login {
+.container-terceira-tela {
     width: 100%;
     min-height: 100vh;
     display: -webkit-box;
@@ -64,7 +64,7 @@ body {
     z-index: 1;
 }
 
-.container-login::before {
+.container-terceira-tela::before {
     content: "";
     display: block;
     position: absolute;
@@ -76,7 +76,7 @@ body {
     background-color: rgba(255,255,255,0.8);
 }
 
-.wrap-login {
+.wrap-terceira-tela {
     width: 500px;
     border-radius: 10px;
     overflow: hidden;
@@ -88,11 +88,11 @@ body {
     background: linear-gradient(top, #192bcf, #192bcf);
 }
 
-.login-form {
+.terceira-tela-form {
     width: 100%;
 }
 
-.login-form-logo {
+.terceira-tela-form-logo {
     font-size: 60px;
     color: #333333;
     display: -webkit-box;
@@ -120,7 +120,7 @@ body {
     content: url(../../public/img/RIOPREFEITURA.png);
 }
 
-.login-form-title {
+.terceira-tela-form-title {
     font-family: Poppins-Medium;
     font-size: 30px;
     color: #fff;
@@ -288,7 +288,7 @@ label {
     transform: translateY(-50%);
 }
 
-.container-login-form-btn {
+.container-terceira-tela-form-btn {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -299,7 +299,7 @@ label {
     justify-content: center;
 }
 
-.login-form-btn {
+.terceira-tela-form-btn {
     font-family: Poppins-Medium;
     font-size: 16px;
     color: #555555;
@@ -339,7 +339,7 @@ button, select {
     text-transform: none;
 }
 
-.login-form-btn::before {
+.terceira-tela-form-btn::before {
     content: "";
     display: block;
     position: absolute;
@@ -392,64 +392,38 @@ a {
     -webkit-text-decoration-skip: objects;
 }
 
-.divider {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
-}
-
-.divider-text {
-    flex: 1;
-    height: 1px;
-    color: white;
-    background-color: rgba(255,255,255,0.24); /* Cor da linha */
-    text-align: center;
-    margin: 0 10px; /* Espaçamento lateral */
-}
-
-.social-button {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-.social-button a{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.google-btn,
-.facebook-btn,
-.microsoft-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px;
+/* Estilo para selects */
+select {
+    font-family: Poppins-Regular;
     font-size: 16px;
-    text-decoration: none;
     color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 10px;
     border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
+    outline: none;
+}
+select option{
+    color: #000;
 }
 
-.google-btn img,
-.facebook-btn img,
-.microsoft-btn img {
-    width: 30px;
-    height: 30px;
+/* Estilo para input de texto */
+textarea {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px;
+    border: none;
+    outline: none;
 }
-
-.google-btn,
-.facebook-btn,
-.microsoft-btn {
-    background-color: white;
-}
-
-.google-btn:hover,
-.facebook-btn:hover,
-.microsoft-btn:hover {
-    background-color: #333;
+textarea::placeholder{
+    color: #fff;
 }
