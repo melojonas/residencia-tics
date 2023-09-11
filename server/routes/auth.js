@@ -88,8 +88,8 @@ router.post('/logout', function(req, res, next) {
  * desired username and password.  When the user submits the form, a request
  * will be sent to the `POST /signup` route.
  */
-router.get('/signup', function(req, res) {
-  res.render('signup');
+router.get('/cadastro', function(req, res) {
+  res.render('cadastro');
 });
 
 /* POST /signup
@@ -101,7 +101,7 @@ router.get('/signup', function(req, res) {
  * then a new user record is inserted into the database.  If the record is
  * successfully created, the user is logged in.
  */
-router.post('/signup', async (req, res) => {
+router.post('/cadastro', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
   try {

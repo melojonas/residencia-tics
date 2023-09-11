@@ -1,21 +1,21 @@
 @font-face {
     font-family: Poppins-Regular;
-    src: url('../../public/fonts/poppins/Poppins-Regular.ttf');
+    src: url('/fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
     font-family: Poppins-Medium;
-    src: url('../../public/fonts/poppins/Poppins-Medium.ttf');
+    src: url('/fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
     font-family: Poppins-Bold;
-    src: url('../../public/fonts/poppins/Poppins-Bold.ttf');
+    src: url('/fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
     font-family: Poppins-SemiBold;
-    src: url('../../public/fonts/poppins/Poppins-SemiBold.ttf');
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 
@@ -35,7 +35,7 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('../../public/img/background.jpg');
+    background-image: url('/img/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -159,7 +159,7 @@ html {
 }
 
 .zmdi-landscape:before {
-    content: url(../../public/img/RIOPREFEITURA.png);
+    content: url(/img/RIOPREFEITURA.png);
 }
 
 .sidebar ul {
