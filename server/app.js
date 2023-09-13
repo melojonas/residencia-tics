@@ -15,6 +15,9 @@ const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
 
+const indexRoutes = require(path.join(__dirname + '/routes/index'));
+const authRoutes = require(path.join(__dirname + '/routes/auth'));
+
 // dependências para autenticação e sessão
 const pgSession = require('connect-pg-simple')(session);
 const LocalStrategy = require('passport-local').Strategy;
@@ -61,12 +64,8 @@ app.use(passport.session());
 /* ROTAS */
 
 // Rota para home
-const index = require(path.join(__dirname + '/routes/index'));
-app.use('/', index);
-
-// Rota para login
-const auth = require(path.join(__dirname + '/routes/auth'));
-app.use('/login', auth);
+app.use('/', indexRoutes);
+app.use('/', authRoutes);
 
 /* ERROR HANDLER */
 
