@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sistema de Gestão Acadêmica</title>
+	</head>
+	<body>
+		<header>
+			<h1>Sistema de Gestão Acadêmica</h1>
+		</header>
+		<main>
+			<h2>Login</h2>
+			<form action="/login" method="post">
+				<label for="email">E-mail</label>
+				<input type="email" name="email" id="email" required>
+				<label for="senha">Senha</label>
+				<input type="password" name="senha" id="senha" required>
+				<button type="submit">Entrar</button>
+			</form>
+			<p>Não possui uma conta? <a href="/cadastro">Cadastre-se</a></p>
+		</main>
+		<footer class="info">
+			<p>Criado por <a href="#">Grupo Manhattan</a></p>
+			<p>Parte do <a href="https://gestaoacademica.azurewebsites.net">Sistema de Gestão Acadêmica</a></p>
+		</footer>
+	</body>
+</html>

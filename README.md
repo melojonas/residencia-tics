@@ -7,38 +7,34 @@
 
 ```
 residencia-tics
-├─ .gitignore
+├─ README.md
 ├─ client
 │  ├─ public
-│  │  ├─ assets
-│  │  │  ├─ images
-│  │  │  └─ plugins
 │  │  ├─ css
 │  │  │  └─ style.css
 │  │  └─ js
 │  │     └─ script.js
 │  └─ src
 │     ├─ app.js
-│     ├─ Components
 │     ├─ index.js
-│     ├─ views
-│     │  ├─ index.ejs
-│     │  └─ partials
-│     │     └─ header.ejs
-│     └─ services
+│     └─ views
+│        ├─ index.ejs
+│        └─ partials
+│           └─ header.ejs
 ├─ package-lock.json
 ├─ package.json
-├─ README.md
 └─ server
-   ├─ main.js
+   ├─ app.js
    ├─ config
    │  ├─ database.js
-   │  └─ server.js
+   │  ├─ server.js
+   │  └─ tsconfig.json
    ├─ controllers
-   ├─ index.js
+   │  └─ authController.js
    ├─ models
+   │  └─ user.js
    └─ routes
-
+      └─ auth.js
 ```
 
 ## Desenvolvimento Colaborativo no GitHub
