@@ -29,8 +29,7 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/server.js"
   },
   "author": "Grupo Manhattan",
   "license": "ISC",
