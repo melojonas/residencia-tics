@@ -1,11 +1,12 @@
 /* DEPENDÊNCIAS */
 const express = require('express');
+const app = express();
+const mongodb = require('mongodb');
 const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const passport = require('passport');
-const pg = require("pg");
 const session = require('express-session');
 const flash = require('flash');
 const validator = require('validator');
@@ -18,16 +19,13 @@ const ejs = require('ejs');
 const indexRoutes = require(path.join(__dirname + '/routes/index'));
 const authRoutes = require(path.join(__dirname + '/routes/auth'));
 
-// dependências para autenticação e sessão
-const pgSession = require('connect-pg-simple')(session);
 const LocalStrategy = require('passport-local').Strategy;
 
-// path para root do projeto
 global.__root = path.resolve(__dirname, '..');
 
 /* MIDDLEWARES */
 dotenv.config();
-const app = express();
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__root + '/client/src/views'));
@@ -41,14 +39,10 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__root + '/client/public')));
 
 // Configurando a sessão
-const pgPool = new pg.Pool();
+// const pgPool = new pg.Pool();
 
 app.use(
   session({
-    store: new pgSession({
-      pool: pgPool,
-      tableName: "session" // script para criar a tabela: node_modules/connect-pg-simple/table.sql
-    }),
     secret: process.env.SESSION_SECRET,
     secure: false,
     resave: false,

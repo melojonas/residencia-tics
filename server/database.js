@@ -1,30 +1,92 @@
-/* Configurações do banco de dados PostgreSQL */
+const express = require('express');
+const dotenv = require('dotenv');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { Module } = require('module');
+const { log } = require('console');
+dotenv.config();
+const uri = process.env.MONGODBURL;
 
-const pg = require('pg')
-const fs = require('fs')
-const path = require('path')
+// MODELO PARA INSERIR DADOS, CRIAR BANCO DE DADOS E DOCUMENTOS
 
-const config = {
-    user: process.env.LOCAL_USER,
-    database: process.env.LOCAL_DATABASE,
-    password: process.env.LOCAL_PASSWORD,
-    port: process.env.LOCAL_PORT,
-    host: process.env.LOCAL_HOST,
-    /* ssl: {
-        require: true,
-        rejectUnauthorized: false,
-        key: fs.readFileSync(path.join(__dirname, '/certs/key.pem')).toString(),
-        cert: fs.readFileSync(path.join(__dirname, '/certs/certificate.pem')).toString()
-    } */
+
+
+async function run(inserir=false, procurar=false, atualizar=false, deletar=false, banco, documento, data) {
+
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+ 
+  if(inserir == true){
+    try {
+      await client.connect();
+
+      const dbo = client.db(`${banco}`);
+      const colecao = `${documento}`;
+      const obj = {data};
+      
+      await dbo.collection(colecao).insertOne(obj);
+      console.log('Um novo registro inserido');
+
+    } finally {
+      await client.close();
+    }
+  } else if (procurar == true){
+    try {
+      await client.connect();
+
+      const dbo = client.db(`${banco}`);
+      const colecao = `${documento}`;
+      const obj = {data};
+      
+      await dbo.collection(colecao).findOne(obj);
+      console.log("Documento encontrado");
+
+    } finally {
+      await client.close();
+    }
+  } else if (atualizar == true){
+    try {
+      await client.connect();
+
+      const dbo = client.db(`${banco}`);
+      const colecao = `${documento}`;
+      const obj = {data};
+      
+      await dbo.collection(colecao).updateOne(obj);
+      console.log("Documento atualizado");
+
+    } finally {
+      await client.close();
+    }
+  } else if (deletar == true){
+    try {
+      await client.connect();
+
+      const dbo = client.db(`${banco}`);
+      const colecao = `${documento}`;
+      const obj = {data};
+      
+      await dbo.collection(colecao).deleteOne(obj);
+      console.log("Valor deletado");
+
+    } finally {
+      await client.close();
+    }
+  }
 }
 
-const pool = new pg.Pool(config)
+run().catch(console.dir);
 
-const query = async (text, params) => {
-    const res = await pool.query(text, params)
-    return res   
-}
+module.exports = run();
 
-module.exports = {
-    query
-}
+
+
+
+
+
+
+
