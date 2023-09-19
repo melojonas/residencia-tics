@@ -8,9 +8,7 @@ const uri = process.env.MONGODBURL;
 
 // MODELO PARA INSERIR DADOS, CRIAR BANCO DE DADOS E DOCUMENTOS
 
-
-
-async function run(inserir=false, procurar=false, atualizar=false, deletar=false, banco, documento, data) {
+module.exports.run = async function run(inserir=false, procurar=false, atualizar=false, deletar=false, banco, documento, data) {
 
   const client = new MongoClient(uri, {
     serverApi: {
@@ -73,15 +71,18 @@ async function run(inserir=false, procurar=false, atualizar=false, deletar=false
       await dbo.collection(colecao).deleteOne(obj);
       console.log("Valor deletado");
 
+    } catch { run().console.dir
     } finally {
       await client.close();
     }
+
+    
   }
 }
 
-run().catch(console.dir);
 
-module.exports = run();
+
+
 
 
 

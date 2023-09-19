@@ -5,15 +5,22 @@
  * 
  */
 
-
+const { run } = require('../database')
 const db = require('../db/users.js');
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 async function createUser(email, password) {
   const newUser = new User(email, password);
-  const result = await db.createUser(newUser.email, newUser.password);
+  await db.createUser(newUser.email, newUser.password);
 
-  return result;
+  const banco = "gestaoacademica";
+  const documento = "users";
+  const data = {
+      email: email,
+      password: password,
+  };
+  await run(inserir=true, procurar=false, atualizar=false, deletar=false, banco, documento, data);
 }
 
 async function findUserByEmail(email) {
@@ -21,11 +28,11 @@ async function findUserByEmail(email) {
 }
 
 async function updateUser(email, password) {
-  const result = await db.updateUser(email, password);
+  await db.updateUser(email, password);
 }
 
 async function deleteUser(email) {
-  const result = await db.deleteUser(email);
+  await db.deleteUser(email);
 }
 
 module.exports = {

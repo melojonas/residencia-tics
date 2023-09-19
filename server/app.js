@@ -50,7 +50,7 @@ app.use(
     cookie: { cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } } // 30 dias
   })
 );
-
+ 
 // Inicializando o passport
 app.use(passport.initialize());
 app.use(passport.session());
