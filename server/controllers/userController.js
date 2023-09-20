@@ -4,27 +4,17 @@
  * Ele é importante para validar os dados de entrada e garantir que sejam inseridos no banco de dados de forma segura.
  * 
  */
-
-const { run } = require('../database')
+const mongoose = require('../database');
+const UserSchema = require('../models/UserSchema')
 const db = require('../db/users.js');
-const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 async function createUser(email, password) {
-  const newUser = new User(email, password);
-  await db.createUser(newUser.email, newUser.password);
-
-  const banco = "gestaoacademica";
-  const documento = "users";
-  const data = {
-      email: email,
-      password: password,
-  };
-  await run(inserir=true, procurar=false, atualizar=false, deletar=false, banco, documento, data);
+  await db.createUser(email, password);
 }
 
 async function findUserByEmail(email) {
-  const result = await db.findUserByEmail(email);
+  await db.findUserByEmail(email);
 }
 
 async function updateUser(email, password) {

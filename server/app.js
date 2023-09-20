@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
+const mongoose = require('./database');
 const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const helmet = require('helmet');
@@ -15,6 +16,7 @@ const cors = require('cors');
 const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
+const UserSchema = require ('../server/models/UserSchema');
 
 const indexRoutes = require(path.join(__dirname + '/routes/index'));
 const authRoutes = require(path.join(__dirname + '/routes/auth'));

@@ -4,7 +4,6 @@ const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const userController = require('../controllers/userController');
-const database = require ('../database');
 
 const router = express.Router();
 
