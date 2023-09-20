@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
+const mongoose = require('./database');
 const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const helmet = require('helmet');
@@ -15,6 +16,7 @@ const cors = require('cors');
 const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
+const UserSchema = require ('../server/models/UserSchema');
 
 const indexRoutes = require(path.join(__dirname + '/routes/index'));
 const authRoutes = require(path.join(__dirname + '/routes/auth'));
@@ -50,7 +52,7 @@ app.use(
     cookie: { cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } } // 30 dias
   })
 );
-
+ 
 // Inicializando o passport
 app.use(passport.initialize());
 app.use(passport.session());

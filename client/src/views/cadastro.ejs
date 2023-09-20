@@ -14,7 +14,7 @@
     <div class="container">
         <div class="container-cadastro" style="background-image: url('/img/background.jpg');">
             <div class="wrap-cadastro">
-                <form class="cadastro-form validate-form">
+                <form class="cadastro-form validate-form" method="POST" action="/cadastro">
                     <span class="cadastro-form-logo">
                         <i class="zmdi zmdi-landscape"></i>
                     </span>
@@ -40,23 +40,23 @@
                     </div>
 
                     <div class="wrap-input validate-input">
-                        <input class="input" type="text" name="username" placeholder="Usuário" autocomplete="email">
+                        <input class="input" type="email" name="email" placeholder="Usuário" autocomplete="on">
                         <span class="focus-input" data-placeholder="&#xf207;"></span>
                     </div>
 
                     <div class="wrap-input validate-input">
-                        <input class="input" type="password" name="pass" placeholder="Senha">
+                        <input class="input" type="password" name="password" placeholder="Senha">
                         <span class="focus-input" data-placeholder="&#xf191;"></span>
                     </div>
 
                     <div class="container-cadastro-form-btn">
-                        <button class="cadastro-form-btn">
+                        <button type="submit" class="cadastro-form-btn">
                             Cadastrar
                         </button>
                     </div>
 
                     <div class="text-center">
-                        <a class="txt1" href="login.ejs">
+                        <a class="txt1" href="login">
                             Já tem uma conta? Faça o login.
                         </a>
                     </div>
