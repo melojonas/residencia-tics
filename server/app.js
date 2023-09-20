@@ -41,7 +41,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__root + '/client/public')));
 
 // Configurando a sessão
-// const pgPool = new pg.Pool();
+mongoose.connect();
 
 app.use(
   session({

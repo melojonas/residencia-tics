@@ -1,20 +1,16 @@
 /* CRUD operations on the users table in the database */
 
 const mongoose = require ('../database');
-const UserSchema = require('../models/UserSchema');
+const User = require('../models/User');
 
 async function createUser(email, password) {
-
-    const User = mongoose.model('usuarios');
-
-    await new User({
-        email: email,
-        password: password
-    }).save();
+  const user = new User({ email, password });
+  await user.save();
+  return user;
 }
 
 async function findUserByEmail(email) {
-
+  
 }
 
 async function updateUser(email, password) {
