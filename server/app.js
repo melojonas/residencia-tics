@@ -16,18 +16,17 @@ const cors = require('cors');
 const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
-const UserSchema = require ('../server/models/UserSchema');
 
 const indexRoutes = require(path.join(__dirname + '/routes/index'));
 const authRoutes = require(path.join(__dirname + '/routes/auth'));
 
+require('./passport')(passport);
 const LocalStrategy = require('passport-local').Strategy;
 
 global.__root = path.resolve(__dirname, '..');
 
 /* MIDDLEWARES */
 dotenv.config();
-
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__root + '/client/src/views'));
@@ -79,42 +78,6 @@ app.use((err, req, res, next) => {
   // Render the error page
   res.status(err.status || 500);
   res.send(err);
-});
-
-/* AUTENTICAÇÃO DE USUÁRIO */
-
-// Configure Passport.js with Local Strategy
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await userController.findUserByUsername(username);
-
-      if (!user) {
-        return done(null, false, { message: 'E-mail ou senha incorreto' });
-      }
-
-      if (!bcrypt.compareSync(password, user.password)) {
-        return done(null, false, { message: 'E-mail ou senha incorreto' });
-      }
-
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  })
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await userController.findUserById(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
 });
 
 module.exports = app;
