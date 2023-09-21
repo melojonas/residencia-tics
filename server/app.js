@@ -1,15 +1,15 @@
 /* DEPENDÊNCIAS */
+const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
 const mongoose = require('./database');
-const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
-const flash = require('flash');
+const flash = require('connect-flash');
 const validator = require('validator');
 const path = require('path');
 const cors = require('cors');
@@ -31,10 +31,11 @@ dotenv.config();
 app.set("view engine", "ejs");
 app.set("views", path.join(__root + '/client/src/views'));
 
+app.use(flash());
 app.use(cors());
 app.use(express.json());
 app.use(helmet());
-app.use(morgan('dev')); // TODO: Change to 'combined' for production
+app.use(morgan('dev')); // TODO: Mudar para 'combined' em produção
 app.use(bodyparser.json( { extended: true } ));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__root + '/client/public')));

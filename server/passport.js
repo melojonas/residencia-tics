@@ -34,11 +34,13 @@ module.exports = function(passport) {
                     newUser.hashed_password = password;
                     newUser.name = req.body.name;
                     newUser.role = req.body.role;
-                    await newUser.save();
-                    return done(null, newUser);
+                    await newUser.save( (err) => {
+                        if (err) throw err;
+                        return done(null, newUser);
+                    });
                 }
-            } catch (error) {
-                return done(error);
+            } catch (err) {
+                return done(err);
             }
         }
         );
@@ -59,5 +61,4 @@ module.exports = function(passport) {
             return done(err);
         }
     }));
-    
 }

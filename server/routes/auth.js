@@ -2,21 +2,33 @@
 
 const express = require('express');
 const passport = require('passport');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'auth-service' },
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.Console({ format: winston.format.simple() })
+  ]
+});
 
 const router = express.Router();
 
-router.get('/', ensureAuthenticated, (req, res) => {
-  res.render('index', { user: req.user });
-});
+// Jonas: Não lembro o porque dessa rota aqui nesse arquivo
+/* router.get('/', (req, res) => {
+  res.render('home', { user: req.user });
+}); */
 
 router.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', { message: req.flash('loginMessage') });
 });
 
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureMessage: true
+  failureFlash: true
 }));
 
 router.post('/logout', (req, res, next) => {
@@ -27,7 +39,7 @@ router.post('/logout', (req, res, next) => {
 });
 
 router.get('/cadastro', (req, res) => {
-  res.render('cadastro');
+  res.render('cadastro', { message: req.flash('signupMessage') });
 });
 
 router.post('/cadastro', passport.authenticate('local-signup', {
@@ -35,12 +47,5 @@ router.post('/cadastro', passport.authenticate('local-signup', {
   failureRedirect: '/cadastro',
   failureFlash: true
 }));
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
 
 module.exports = router;

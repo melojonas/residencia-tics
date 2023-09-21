@@ -5,7 +5,9 @@ const url = process.env.MONGODB_URL;
 mongoose.Promise = global.Promise;
 
 const connect = async () => {
+  
   mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
   const db = mongoose.connection;
   db.on("error", () => {
     console.error("Erro ao se conectar ao banco de dados");
