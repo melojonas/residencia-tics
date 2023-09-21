@@ -403,9 +403,9 @@ a {
     flex: 1;
     height: 1px;
     color: white;
-    background-color: rgba(255,255,255,0.24); /* Cor da linha */
+    background-color: rgba(255,255,255,0.24);
     text-align: center;
-    margin: 0 10px; /* Espaçamento lateral */
+    margin: 0 10px;
 }
 
 .social-button {
