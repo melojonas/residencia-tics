@@ -7,7 +7,6 @@ const mongoose = require('./database');
 const bodyparser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const validator = require('validator');
@@ -17,11 +16,9 @@ const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
 
-const indexRoutes = require(path.join(__dirname + '/routes/index'));
-const authRoutes = require(path.join(__dirname + '/routes/auth'));
-
-require('./passport')(passport);
-const LocalStrategy = require('passport-local').Strategy;
+const indexRoutes = require(path.join(__dirname + '/routes/indexRoutes'));
+const authRoutes = require(path.join(__dirname + '/routes/authRoutes'));
+const userRoutes = require(path.join(__dirname + '/routes/userRoutes'));
 
 global.__root = path.resolve(__dirname, '..');
 
@@ -52,20 +49,17 @@ app.use(
     cookie: { cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } } // 30 dias
   })
 );
- 
-// Inicializando o passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 /* ROTAS */
 
 // Rota para home
 app.use('/', indexRoutes);
 app.use('/', authRoutes);
+app.use('/', userRoutes);
 
 /* ERROR HANDLER */
 
-// 404 handler and pass to error handler
+/* // 404 handler and pass to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });
@@ -79,6 +73,6 @@ app.use((err, req, res, next) => {
   // Render the error page
   res.status(err.status || 500);
   res.send(err);
-});
+}); */
 
 module.exports = app;
