@@ -30,10 +30,10 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('signupMessage', 'Este e-mail já está cadastrado.'));
                 } else {
                     const newUser = new User();
-                    newUser.email = email;
-                    newUser.hashed_password = password;
-                    newUser.name = req.body.name;
-                    newUser.role = req.body.role;
+                    newUser.email = req.body.email;
+                    newUser.hashed_password = req.body.password;
+                    /* newUser.name = req.body.name;
+                    newUser.role = req.body.role; */
                     await newUser.save( (err) => {
                         if (err) throw err;
                         return done(null, newUser);
