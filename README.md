@@ -46,7 +46,7 @@ Nós adotamos um fluxo de trabalho baseado no modelo de *branching* (ramificaç�
 git clone https://github.com/melojonas/residencia-tics.git
 ```
 
-2. **Crie uma Branch**: Antes de começar a fazer alterações, crie uma nova branch a partir da branch `main` com um nome descritivo para a funcionalidade que você está trabalhando:
+2. **Crie uma Branch**: Antes de começar a fazer alterações, crie uma nova branch a partir da branch `main` com um nome descritivo para a funcionalidade que você está trabalhando (possível criar no problema/issues que está trabalhando):
 ```
 git checkout -b nome-da-minha-feature
 ```
