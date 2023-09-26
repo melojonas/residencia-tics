@@ -40,7 +40,7 @@ const createUser = async (req, res, next) => {
 // Function to fetch a user by id
 const getUserById = async (req, res, next, id) => {
     try {
-        const user = await User.findById(id).select('-hashed_password -__v');
+        const user = await User.findById(id).select('-password -__v');
 
         if (!user) {
             return res.status(404).json({ message: 'Usuário não encontrado.' });

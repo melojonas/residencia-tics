@@ -35,9 +35,35 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.pre('save', async function (next) {
+  let user = this;
+
+  if (!user.isModified('password')) return next();
+
+  bcrypt
+    .hash(user.password, 10)
+    .then((hashedPassword) => {
+      user.password = hashedPassword;
+      next();
+    })
+    .catch((err) => {
+      console.log(`Error hashing password for user ${user.name}`);
+      next(err);
+    });
+});
+
 UserSchema.methods = {
-  authenticate: async function (password) {
-    return await bcrypt.compare(password, this.password);
+  authenticate: async function (cadidatePassword) {
+    const user = this;
+    return bcrypt
+      .compare(cadidatePassword, user.password)
+      .then((isMatch) => {
+        return isMatch;
+      })
+      .catch((err) => {
+        console.log(`Error authenticating user ${user.name}`);
+        return false;
+      });
   }
 };
 

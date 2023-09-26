@@ -17,9 +17,9 @@ const login = async (req, res) => {
         }
 
         // Authenticate the user
-        const authenticated = user.authenticate(req.body.password);
+        const authenticated = await user.authenticate(req.body.password);
 
-        if (!authenticated) {
+        if (authenticated !== true) {
             return res.status(401).json({
                 error: 'E-mail ou senha incorreta.'
             });
@@ -61,7 +61,7 @@ const isAuthorized = (req, res, next) => {
     const user = req.profile && req.auth && req.profile._id == req.auth._id;
     if (!user) {
         return res.status(403).json({
-            error: 'Acesso negado'
+            error: 'Acesso negado.'
         });
     }
     next();
