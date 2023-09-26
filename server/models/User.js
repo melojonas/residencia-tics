@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     match: [/.+\@.+\..+/, 'Por favor, preencha um e-mail válido'],
     required: 'E-mail é obrigatório'
   },
-  hashed_password: {
+  password: {
     type: String,
     required: 'Senha é obrigatória'
   },
@@ -35,44 +35,10 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.virtual('password')
-  .set(function(password) {
-    this._password = password;
-    this.hashed_password = this.encryptPassword(password);
-  })
-  .get(function() {
-    return this._password;
-  });
-
-UserSchema.path('hashed_password').validate(function(v) {
-  if (this._password && this._password.length < 6) {
-    this.invalidate('password', 'A senha deve ter no mínimo 6 caracteres.');
-  }
-  if (this.isNew && !this._password) {
-    this.invalidate('password', 'Senha é obrigatória.');
-  }
-}, null);
-
-// TODO: Verificar se o método update está funcionando
-/* UserSchema.pre('update', function(next) {
-  this.updated({}, { $set: { updated: new Date() } });
-  next();
-}); */
-
 UserSchema.methods = {
-  authenticate: function(password, callback) {
-    bcrypt.compare(password, this.password, function(err, isMatch) {
-      if (err) return callback(err);
-      callback(null, isMatch);
-    })
-  },
-  encryptPassword: function(password) {
-    if (!password) return '';
-    bcrypt.hash(password, 10, function(err, hash) {
-      if (err) return next(err);
-      return hash;
-    })
+  authenticate: async function (password) {
+    return await bcrypt.compare(password, this.password);
   }
-}
+};
 
 module.exports = mongoose.model('User', UserSchema);

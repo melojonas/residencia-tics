@@ -25,19 +25,6 @@ global.__root = path.resolve(__dirname, '..');
 /* MIDDLEWARES */
 dotenv.config();
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__root + '/client/src/views'));
-
-app.use(flash());
-app.use(cors());
-app.use(express.json());
-app.use(helmet());
-app.use(morgan('dev')); // TODO: Mudar para 'combined' em produção
-app.use(bodyparser.json( { extended: true } ));
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__root + '/client/public')));
-
-// Configurando a sessão
 mongoose.connect();
 
 app.use(
@@ -50,14 +37,36 @@ app.use(
   })
 );
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__root + '/client/src/views'));
+
+app.use(flash());
+app.use(cors());
+app.use(helmet());
+app.use(morgan('dev')); // TODO: Mudar para 'combined' em produção
+app.use(bodyparser.json( { extended: true } ));
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__root + '/client/public')));
+
+
 /* ROTAS */
 
 // Rota para home
 app.use('/', indexRoutes);
-app.use('/', authRoutes);
-app.use('/', userRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 /* ERROR HANDLER */
+
+// Error handler para express-jwt
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({"error" : err.name + ": " + err.message})
+  } else if (err) {
+    res.status(400).json({"error" : err.name + ": " + err.message})
+    console.log(err)
+  }
+})
 
 /* // 404 handler and pass to error handler
 app.use((req, res, next) => {

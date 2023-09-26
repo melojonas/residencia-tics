@@ -17,9 +17,11 @@ const login = async (req, res) => {
         }
 
         // Authenticate the user
-        if (!user.authenticate(req.body.password)) {
+        const authenticated = user.authenticate(req.body.password);
+
+        if (!authenticated) {
             return res.status(401).json({
-                error: 'E-mail ou senha incorreto'
+                error: 'E-mail ou senha incorreta.'
             });
         }
 
@@ -47,7 +49,7 @@ const logout = (req, res) => {
 };
 
 // Authentication middleware
-const requireAuth = expressjwt({
+const isAuthenticated = expressjwt({
     secret: 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1',
     algorithms: ['HS256'],
     userProperty: 'auth',
@@ -55,7 +57,7 @@ const requireAuth = expressjwt({
 });
 
 // Authorization middleware
-const isAuth = (req, res, next) => {
+const isAuthorized = (req, res, next) => {
     const user = req.profile && req.auth && req.profile._id == req.auth._id;
     if (!user) {
         return res.status(403).json({
@@ -68,6 +70,6 @@ const isAuth = (req, res, next) => {
 module.exports = {
     login,
     logout,
-    requireAuth,
-    isAuth
+    isAuthenticated,
+    isAuthorized
 };
