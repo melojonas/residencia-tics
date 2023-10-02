@@ -50,10 +50,12 @@ const logout = (req, res) => {
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    const token = req.headers.cookie.split('=')[1];
+    const token = req.cookies.t;
+
     if (!token) {
         return res.redirect('/auth/login');
     }
+
     jwt.verify(token, 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1', (err, decoded) => {
         if (err) {
             return res.redirect('/auth/login');
