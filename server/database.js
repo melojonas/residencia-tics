@@ -1,26 +1,20 @@
-const mongoose = require ('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
-
-const uri = process.env.MONGODBURL;
+const dotenv = require('dotenv').config();
+const mongoose = require('mongoose');
+const url = process.env.MONGODB_URL;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(uri).then(() => {
-  console.log("Conectado com MondoDB no Mongoose");
-}).catch((err) => {
-  console.log(err);
-});
 
-module.exports = mongoose;
+const connect = async () => {
+  
+  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
+  const db = mongoose.connection;
+  db.on("error", () => {
+    console.error("Erro ao se conectar ao banco de dados");
+  });
+  db.once("open", () => {
+    console.log("Conectado ao banco de dados");
+  });
+};
 
-
-
-
-
-
-
-
-
-
-
+module.exports = { connect };
