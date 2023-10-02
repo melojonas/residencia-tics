@@ -50,7 +50,7 @@ const logout = (req, res) => {
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.headers.cookie.split('=')[1];
     if (!token) {
         return res.redirect('/auth/login');
     }
