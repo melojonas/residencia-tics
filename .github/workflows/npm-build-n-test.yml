@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: ${{ env.NODE_VERSION }}
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -24,3 +24,4 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+    - run: npm run test --if-present
