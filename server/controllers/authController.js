@@ -49,12 +49,19 @@ const logout = (req, res) => {
 };
 
 // Authentication middleware
-const isAuthenticated = expressjwt({
-    secret: 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1',
-    algorithms: ['HS256'],
-    userProperty: 'auth',
-    redirectTo: '/login'
-});
+const isAuthenticated = (req, res, next) => {
+    const token = req.headers.cookie.split('=')[1];
+    if (!token) {
+        return res.redirect('/auth/login');
+    }
+    jwt.verify(token, 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1', (err, decoded) => {
+        if (err) {
+            return res.redirect('/auth/login');
+        }
+        req.auth = decoded;
+        next();
+    });
+};
 
 // Authorization middleware
 const isAuthorized = (req, res, next) => {
