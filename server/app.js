@@ -5,6 +5,7 @@ const app = express();
 const mongodb = require('mongodb');
 const mongoose = require('./database');
 const bodyparser = require('body-parser');
+const cookieparser = require('cookie-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -46,6 +47,7 @@ app.use(helmet());
 app.use(morgan('dev')); // TODO: Mudar para 'combined' em produção
 app.use(bodyparser.json( { extended: true } ));
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(cookieparser());
 app.use(express.static(path.join(__root + '/client/public')));
 
 

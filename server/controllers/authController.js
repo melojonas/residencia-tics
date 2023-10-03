@@ -26,7 +26,7 @@ const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ _id: user._id }, 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1');
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
         // Set the token as a cookie
         res.cookie('t', token, { expire: new Date() + 9999 });
@@ -50,11 +50,13 @@ const logout = (req, res) => {
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    const token = req.headers.cookie.split('=')[1];
+    const token = req.cookies.t;
+
     if (!token) {
         return res.redirect('/auth/login');
     }
-    jwt.verify(token, 'fm6dyP40ljIrxa3lOVSdf9Jnc3yVofn1', (err, decoded) => {
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.redirect('/auth/login');
         }
