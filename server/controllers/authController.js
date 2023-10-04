@@ -32,13 +32,13 @@ const login = async (req, res) => {
         res.cookie('t', token, { expire: new Date() + 9999 });
 
         // Return the response with the user and token
-        const { _id, name, email } = user;
-        return res.json({ token, user: { _id, name, email } });
+        // const { _id, name, email } = user;
+        // res.json({ user: { _id, name, email } });
+
+        res.redirect('home')
+        
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            error: 'Erro interno do servidor'
-        });
+        console.error('error')       
     }
 };
 
@@ -50,7 +50,7 @@ const logout = (req, res) => {
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    const token = req.cookies.t;
+    var token = req.cookies.t;
 
     if (!token) {
         return res.redirect('/auth/login');
