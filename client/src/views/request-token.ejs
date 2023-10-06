@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Solicitação de Token</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/request-token.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-request-token" style="background-image: url('/img/background.jpg');">
+            <div class="wrap-request-token">
+                <form class="request-token-form validate-form" id="request-token-form">
+                    <span class="request-token-form-logo">
+                        <i class="zmdi zmdi-landscape"></i>
+                    </span>
+
+                    <span class="request-token-form-title">
+                        Solicitar Token de Verificação
+                    </span>
+                    <p>Por motivos de segurança, para realizar a troca da senha é necessário a validação de um token de segurança. Insira abaixo seu email ou número de celular para receber seu token.</p>
+                    <div class="wrap-input validate-input">
+                        <input class="input" type="text" id="emailOrPhone" name="emailOrPhone" placeholder="Insira seu email ou celular" required>
+                        <span class="focus-input" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="container-request-token-form-btn">
+						<button class="request-token-form-btn">
+							Solicitar
+						</button>
+					</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

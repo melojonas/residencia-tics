@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/usersController');
+const User = require('../models/User');
 const { log } = require('winston');
 
 const router = express.Router();
@@ -16,9 +17,10 @@ router.get('/login', function(req, res, next) {
 router.post('/login', function(req, res, next) {
     console.log(req.body);
 
-    try {
+    const user = User.findOne({email: req.body.email})
 
-    authController.login(req, res);
+    try {
+        authController.login(req, res);
 
     } catch (error) {
         console.log('Erro');
@@ -31,10 +33,27 @@ router.get('/cadastro', (req, res) => {
     res.render('cadastro');
 });
 
-router.post('/cadastro', function(req, res, next) {
+router.post('/cadastro', (req, res, next) => {
     console.log(req.body);
     userController.createUser(req,res);
 });
+
+router.get('/administracao', (req, res) => {
+    res.render('administracao');
+});
+
+router.get('/diario', (req, res) => {
+    res.render('diario');
+});
+
+router.get('/presenca', (req, res) => {
+    res.render('presenca');
+});
+
+router.get('/controledealunos', (req, res) => {
+    res.render('controledealunos');
+});
+
 
 router.get('/logout', function(req, res, next) {
     authController.logout(req, res);

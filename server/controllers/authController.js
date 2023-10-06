@@ -34,6 +34,9 @@ const login = async (req, res) => {
         // Return the response with the user and token
         // const { _id, name, email } = user;
         // res.json({ user: { _id, name, email } });
+        if(user.role == "administracao"){
+            res.redirect('administracao');
+        }
 
         res.redirect('home')
         
