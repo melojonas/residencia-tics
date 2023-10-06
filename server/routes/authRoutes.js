@@ -38,9 +38,18 @@ router.post('/cadastro', (req, res, next) => {
     userController.createUser(req,res);
 });
 
+router.get('/diarioadm', (req, res) => {
+    res.render('diarioadm');
+});
+
+router.get('/presencaadm', (req, res) => {
+    res.render('presencaadm');
+});
+
 router.get('/administracao', (req, res) => {
     res.render('administracao');
 });
+
 
 router.get('/diario', (req, res) => {
     res.render('diario');
