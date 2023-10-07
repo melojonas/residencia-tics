@@ -46,10 +46,9 @@ router.get('/presencaadm', (req, res) => {
     res.render('presencaadm');
 });
 
-router.get('/administracao', (req, res) => {
+router.get('/administracao', (req, res) => {   
     res.render('administracao');
 });
-
 
 router.get('/diario', (req, res) => {
     res.render('diario');
@@ -61,6 +60,10 @@ router.get('/presenca', (req, res) => {
 
 router.get('/controledealunos', (req, res) => {
     res.render('controledealunos');
+});
+
+router.get('/criarusuario', (req, res) => {
+    res.render('criarusuario');
 });
 
 

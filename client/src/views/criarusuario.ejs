@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="/css/administracao.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="mobile-menu-button">
+                <button id="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+            <div class="topbar-content">
+                <p>Grupo Manhattan</p>
+                <img src="/img/perfil-logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="main">
+            <nav class="sidebar">
+                <span class="home-logo">
+                    <i class="zmdi zmdi-landscape"></i>
+                </span>
+                <ul>
+                    <li><a href="administracao">Início</a></li>
+                    <li><a href="diarioadm">Diário</a></li>
+                    <li><a href="presencaadm">Presença</a></li>
+                    <li><a href="controledealunos">Controle</a></li>
+                    <li><a href="#">Notas</a></li>
+                    <li><a href="#">Atividades</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                </ul>
+            </nav>
+            <main class="content">
+                <header>
+                    <h1>Criar novo usuário</h1>
+                    <label>Nome</label><br>
+                    <input type="text" placeholder="Nome"><br>
+                    <label>Matrícula</label><br>
+                    <input type="text" placeholder="Matrícula"><br>
+                    <label>E-mail</label><br>
+                    <input type="email" placeholder="E-mail"><br>
+                    <label>Função</label><br>
+                    <select id="funcoes">
+                        <option value="discente">Aluno</option>
+                        <option value="docente">Professor</option>
+                        <option value="funcionario">Funcionário</option>
+                        <option value="coordenação">Coordenação</option>
+                    </select>
+                    <button type="button" id="button-select">Escolher</button><br><br>
+                    <br>
+                    <br>
+                    <br>
+                    <button id="btnAddUser"><a href="/criarusuario">Novo Usuário</a> </button>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+    <script src="/js/administracao.js"></script>
+</body>
+
+</html>
