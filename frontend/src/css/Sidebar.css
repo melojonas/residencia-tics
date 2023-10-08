@@ -1,0 +1,78 @@
+.sidebar {
+    min-width: 200px;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    padding: 10px 10px 37px 10px;
+    text-align: center;
+    width: 250px;
+    margin-left: -245px;
+    height: 839px;
+    margin-top: 20px;
+    overflow-x: hidden;
+    background: -webkit-linear-gradient(top, #192bcf, #192bcf);
+    background: -o-linear-gradient(top, #192bcf, #192bcf);
+    background: -moz-linear-gradient(top, #192bcf, #192bcf);
+    background: #192bcf;
+}
+
+.sidebar.open {
+    left: 0;
+    margin-left: 20px;
+    height: 839px !important;
+}
+
+
+.home-logo {
+    font-size: 60px;
+    color: #333333;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.zmdi {
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.zmdi-landscape:before {
+    content: url(../img/RIOPREFEITURA.png);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-top: 20px;
+}
+
+.sidebar ul a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.sidebar ul a::after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: white;
+    transition: 300ms;
+}
+
+.sidebar ul a:hover::after {
+    width: 100%;
+}
