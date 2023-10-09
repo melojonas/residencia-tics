@@ -35,10 +35,10 @@ const login = async (req, res) => {
         // const { _id, name, email } = user;
         // res.json({ user: { _id, name, email } });
         if(user.role == "administracao"){
-            res.redirect('http://localhost:3000/Usuarios');
+            res.redirect('http://localhost:3000/Administracao');
         }
 
-        res.redirect('http://localhost:3000/home')
+        res.redirect('http://localhost:3000/Home')
         
     } catch (error) {
         console.error('error')       

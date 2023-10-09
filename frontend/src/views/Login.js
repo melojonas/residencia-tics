@@ -10,7 +10,7 @@ import google from '../img/google-logo.png';
 import microsoft from '../img/microsoft-logo.svg';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/auth'
+    baseURL: 'http://localhost:8080'
 });
 
 
@@ -21,7 +21,7 @@ function Login() {
     const [password, SetNewPw] = useState('');
 
     async function LoginUsuario(){
-        await api.post("http://localhost:8080/auth/login", {
+        await api.post("http://localhost:8080/login", {
           email,
           password
     }).then((response) => {console.log(response)}).catch((error) =>{console.log(error)})};
@@ -55,12 +55,12 @@ function Login() {
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="text" name="email" placeholder="Usuário" onChange={event => SetNewEmail(event.target.value)} />
+                            <input className="input" type="text" name="email" placeholder="Usuário" onChange={(event) => SetNewEmail(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="password" name="password" placeholder="Senha" onChange={event => SetNewPw(event.target.value)} />
+                            <input className="input" type="password" name="password" placeholder="Senha" onChange={(event) => SetNewPw(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf191;"></span>
                         </div>
 

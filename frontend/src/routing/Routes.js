@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Administracao from '../views/Administracao';
 import Cadastro from '../views/Cadastro';
 import Diario from '../views/Diario';
 import Login from '../views/Login';
 import Presenca from '../views/Presenca';
 import RequestToken from '../views/RequestToken';
-import Usuarios from '../views/Usuarios';
 import VerifyToken from '../views/VerifyToken';
 
 function AppRoutes() {
@@ -13,7 +13,8 @@ function AppRoutes() {
         <Router>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/Usuarios" element={<Usuarios />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Administracao" element={<Administracao />} />
                 <Route path="/Diario" element={<Diario />} />
                 <Route path="/Cadastro" element={<Cadastro />} />
                 <Route path="/Requesttoken" element={<RequestToken />} />

@@ -29,11 +29,8 @@ router.post('/login', function(req, res, next) {
     }
 );
 
-router.get('/Cadastro', (req, res) => {
-    res.render('Cadastro');
-});
 
-router.post('/cadastro', (req, res, next) => {
+router.post('/cadastro', (req, res) => {
     console.log(req.body);
     userController.createUser(req,res);
 });
@@ -56,14 +53,6 @@ router.get('/diario', (req, res) => {
 
 router.get('/presenca', (req, res) => {
     res.render('presenca');
-});
-
-router.get('/controledealunos', (req, res) => {
-    res.render('controledealunos');
-});
-
-router.get('/criarusuario', (req, res) => {
-    res.render('criarusuario');
 });
 
 
