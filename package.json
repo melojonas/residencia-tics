@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "handy-storage": "^2.1.6",
+    "store": "^2.0.12"
+  }
+}

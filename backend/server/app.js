@@ -17,6 +17,7 @@ const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
 
+
 const indexRoutes = require(path.join(__dirname + '/routes/indexRoutes'));
 const authRoutes = require(path.join(__dirname + '/routes/authRoutes'));
 const userRoutes = require(path.join(__dirname + '/routes/userRoutes'));
@@ -33,14 +34,13 @@ app.use(
     secret: process.env.SESSION_SECRET,
     secure: false,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: { cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } } // 30 dias
   })
 );
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__root + '/client/src/views'));
-
 app.use(flash());
 app.use(cors());
 app.use(helmet());

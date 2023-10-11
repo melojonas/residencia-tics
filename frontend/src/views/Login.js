@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../css/App.css';
 import '../css/Login.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -13,24 +13,29 @@ const api = axios.create({
     baseURL: 'http://localhost:8080'
 });
 
-
-
 function Login() {
+    
+    const navigate = useNavigate()
 
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
 
-    async function LoginUsuario(){
-        await api.post("http://localhost:8080/login", {
+    function LoginUsuario(){
+        api.post("http://localhost:8080/auth/login", {
           email,
           password
-    }).then((response) => {console.log(response)}).catch((error) =>{console.log(error)})};
+    }).then((response) => { let dados = response.data; 
+        console.log(response.data);
+        localStorage.setItem('nome', `${dados.user.name}`);
+        localStorage.setItem('email', `${dados.user.email}`);  
+        navigate('/Home')})
+        .catch((error) =>{console.log(error)})};
 
     return (
         <div className="container">
             <div className="container-login" style={{ backgroundImage: 'url(/img/background.jpg)' }}>
                 <div className="wrap-login">
-                    <form className="login-form validate-form" method="POST" action="http://localhost:8080/auth/login">
+                    <form className="login-form validate-form" method="POST" action="http://localhost:3000/">
                         <span className="login-form-logo">
                             <i className="zmdi zmdi-landscape"></i>
                         </span>
@@ -66,13 +71,13 @@ function Login() {
 
                         <div className="contact-form-checkbox">
                             <input className="input-checkbox" id="ckb1" type="checkbox" />
-                            <label className="label-checkbox" for="ckb1">
+                            <label className="label-checkbox" htmlFor="ckb1">
                                 Lembrar
                             </label>
                         </div>
 
                         <div className="container-login-form-btn">
-                            <button onClick={LoginUsuario()} className="login-form-btn">
+                            <button type="button" onClick={LoginUsuario} className="login-form-btn">
                                 Login
                             </button>
                         </div>
@@ -82,8 +87,8 @@ function Login() {
                                 Esqueci minha senha
                             </a>
                             <br />
-                            <a className="txt1">
-                                <Link to="/cadastro">Ainda não tem uma conta? Cadastre-se</Link>
+                            <a className="txt1" href="/cadastro">
+                                Ainda não tem uma conta? Cadastre-se
                             </a>
                         </div>
                     </form>

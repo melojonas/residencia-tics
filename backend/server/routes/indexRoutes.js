@@ -1,15 +1,12 @@
 // indexRoute.js
 const express = require('express');
+const authController = require('../controllers/authController')
 const { isAuthenticated, isAuthorized } = require('../controllers/authController');
 
 const router = express.Router();
 
 router.get('/', isAuthenticated, (req, res, next) => {
-    res.render('login');
+    authController.login(req, res)
 });
-
-router.get('/usuarios', isAuthenticated, /* isAuthorized == 'administracao', */ (req, res, next) => {
-    res.render('administracao')
-})
 
 module.exports = router;

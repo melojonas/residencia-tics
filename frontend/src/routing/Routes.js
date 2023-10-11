@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Administracao from '../views/Administracao';
 import Cadastro from '../views/Cadastro';
 import Diario from '../views/Diario';
+import Home from "../views/Home";
 import Login from '../views/Login';
 import Presenca from '../views/Presenca';
 import RequestToken from '../views/RequestToken';
@@ -13,7 +14,7 @@ function AppRoutes() {
         <Router>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/Login" element={<Login />} />
+                <Route path="/Home" element={<Home />} />
                 <Route path="/Administracao" element={<Administracao />} />
                 <Route path="/Diario" element={<Diario />} />
                 <Route path="/Cadastro" element={<Cadastro />} />

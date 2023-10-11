@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../css/App.css';
 import '../css/Cadastro.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -13,18 +13,18 @@ const api = axios.create({
     baseURL: 'http://localhost:8080'
 });
 
-
-
 function Cadastro() {
+
+    const navigate = useNavigate();
     
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
 
-function CriarUsuario(){
-       api.post("http://localhost:8080/cadastro", {
+async function CriarUsuario(){
+       await api.post("http://localhost:8080/auth/cadastro", {
          email,
          password
-}).then((response) => {console.log(response)}).catch((error) =>{console.log(error)})};
+}).then((response) => {let dados = response.data; navigate("/") }).catch((error) =>{console.log(error)})};
 
 
     return (
@@ -67,14 +67,14 @@ function CriarUsuario(){
                         </div>
 
                         <div className="container-cadastro-form-btn">
-                            <button onClick={CriarUsuario()} className="cadastro-form-btn">
+                            <button type="button" onClick={CriarUsuario} className="cadastro-form-btn">
                                 Cadastrar
                             </button>
                         </div>
 
                         <div className="text-center">
-                            <a className="txt1">
-                                <Link to="/Login">Já tem uma conta? Faça o login.</Link>
+                            <a className="txt1" href="/">
+                                Já tem uma conta? Faça o login.
                             </a>
                         </div>
                     </form>

@@ -30,10 +30,10 @@ const createUser = async (req, res, next) => {
 
     try {
         await user.save();
-        /* res.status(201).json({
+        res.status(201).json({
             message: "Usuário cadastrado com sucesso!"
-        }); */
-        res.redirect('http://localhost:3000/Login');
+        }); 
+        
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -57,7 +57,7 @@ const getUserById = async (req, res, next, id) => {
 
 // Function to read a user by id
 const readUser = (req, res) => {
-    return res.json(req.profile);
+    res.json(req.profile);
 };
 
 // Function to update a user's information

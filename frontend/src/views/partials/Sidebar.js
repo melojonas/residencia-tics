@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/Sidebar.css'
+import '../../css/Sidebar.css';
 
 function Sidebar({ isSidebarOpen }) {
     return (
@@ -10,8 +10,8 @@ function Sidebar({ isSidebarOpen }) {
             </span>
             <ul>
                 <li><Link to="/">Início</Link></li>
-                <li><Link to="/usuarios">Administração de Usuários</Link></li>
-                <li><Link to="/diario">Diário</Link></li>
+                <li><Link to="/Administracao">Administração de Usuários</Link></li>
+                <li><Link to="/Diario">Diário</Link></li>
                 <li><a href="#">Calendário</a></li>
                 <li><a href="#">Notas</a></li>
                 <li><a href="#">Atividades</a></li>

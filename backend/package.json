@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "proxy": "http://localhost:3000",
     "@types/express": "^4.17.17",
     "@types/node": "^20.4.8",
     "bcrypt": "^5.1.1",
@@ -17,6 +18,7 @@
     "express-session": "^1.17.3",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",

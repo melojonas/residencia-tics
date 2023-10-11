@@ -2,6 +2,8 @@ const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const { expressjwt } = require('express-jwt');
 const User = require('../models/User');
+const { json } = require('stream/consumers');
+const store = require('store');
 
 dotenv.config();
 
@@ -26,24 +28,24 @@ const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWT_SECRET);
 
         // Set the token as a cookie
         res.cookie('t', token, { expire: new Date() + 9999 });
 
-        // Return the response with the user and token
-        // const { _id, name, email } = user;
-        // res.json({ user: { _id, name, email } });
-        if(user.role == "administracao"){
-            res.redirect('http://localhost:3000/Administracao');
-        }
-
-        res.redirect('http://localhost:3000/Home')
+        //Return the response with the user and token
+        const { _id, name, email } = user;
+        res.json({user: {_id : user._id, name: user.name, email: user.email}})
         
     } catch (error) {
-        console.error('error')       
+        console.error('error') 
     }
 };
+
+const returnDataToken = (req, res) => {
+    
+};
+
 
 const logout = (req, res) => {
     // Limpar o cookie de autenticação
@@ -79,7 +81,9 @@ const isAuthorized = (req, res, next) => {
     next();
 };
 
+
 module.exports = {
+    returnDataToken,
     login,
     logout,
     isAuthenticated,

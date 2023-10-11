@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
-import Header from './partials/Header';
-import Sidebar from './partials/Sidebar';
-import '../css/Home.css';
 import '../css/App.css';
+import '../css/Home.css';
+import Header from './partials/Header.js';
+import Sidebar from './partials/Sidebar.js';
 
 function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,6 +11,8 @@ function Home() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  
 
   return (
     <div className="container">

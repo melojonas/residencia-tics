@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../css/App.css';
+import '../css/Usuarios.css';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
-import '../css/Usuarios.css';
-import '../css/App.css';
 
 function Usuarios() {
 
@@ -41,7 +41,7 @@ function Usuarios() {
 
     const [activeTable, setActiveTable] = useState('tabelaGeral');
     const [users, setUsers] = useState(exampleUsers);
-    //const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
 
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {

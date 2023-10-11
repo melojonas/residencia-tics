@@ -6,13 +6,6 @@ const { log } = require('winston');
 
 const router = express.Router();
 
-router.get('/home', (req, res) => {
-    res.render('home');
-})
-
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
 
 router.post('/login', function(req, res, next) {
     console.log(req.body);
@@ -25,34 +18,15 @@ router.post('/login', function(req, res, next) {
     } catch (error) {
         console.log('Erro');
     }
+});
 
-    }
-);
-
+router.get('/returndatatoken', (req, res) => {
+    authController.returnDataToken(req, res)
+});
 
 router.post('/cadastro', (req, res) => {
     console.log(req.body);
     userController.createUser(req,res);
-});
-
-router.get('/diarioadm', (req, res) => {
-    res.render('diarioadm');
-});
-
-router.get('/presencaadm', (req, res) => {
-    res.render('presencaadm');
-});
-
-router.get('/administracao', (req, res) => {   
-    res.render('administracao');
-});
-
-router.get('/diario', (req, res) => {
-    res.render('diario');
-});
-
-router.get('/presenca', (req, res) => {
-    res.render('presenca');
 });
 
 
