@@ -12,8 +12,6 @@ function Home() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  
-
   return (
     <div className="container">
       <Header toggleSidebar={toggleSidebar} />

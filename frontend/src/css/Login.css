@@ -91,7 +91,6 @@ body {
     text-align: center;
     text-transform: uppercase;
     display: block;
-    padding-top: 27px;
     padding-bottom: 34px;
 }
 
@@ -319,7 +318,7 @@ button, select {
 .txt1 {
     font-family: Poppins-Regular;
     font-size: 13px;
-    color: #e5e5e5;
+    color: white;
     line-height: 1.5;
 }
 
@@ -327,19 +326,15 @@ a {
     font-family: Poppins-Regular;
     font-size: 14px;
     line-height: 1.7;
-    color: #666666;
+    color: white;
     margin: 0px;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
     transition: all 0.4s;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
 }
 
 .divider {

@@ -1,3 +1,39 @@
+@media (max-width: 768px) {
+    .large-screen {
+        display: none;
+    }
+
+    .responsive-table {
+        display: block !important;
+    }
+
+    .content {
+        margin: 20px 20px 20px 40px !important;
+    }
+
+    .select-turmas {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+        align-content: flex-start !important;
+        justify-content: flex-start !important;
+    }
+
+    .turmas,
+    .bimestres {
+        display: flex !important;
+        align-items: center;
+    }
+
+    h1 {
+        text-align: center !important;
+    }
+}
+
+.responsive-table {
+    display: none;
+}
+
 #turma-select,
 #bimestre-select {
     font-family: Poppins-Regular;
@@ -13,6 +49,11 @@
     margin-right: 25px;
 }
 
+.turmas,
+.bimestres{
+    display: flex;
+}
+
 select option {
     color: #000;
 }
@@ -24,7 +65,7 @@ select option {
     align-content: center;
 }
 
-.select-turmas label{
+.select-turmas label {
     display: flex;
     align-items: center;
 }
@@ -86,7 +127,7 @@ textarea {
 }
 
 #btnEdit,
-#btnDelete{
+#btnDelete {
     background-color: white;
     border: none;
     padding: 6px 12px;

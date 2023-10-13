@@ -1,105 +1,125 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../css/App.css';
+import '../css/Diario.css';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
-import '../css/Diario.css';
-import '../css/App.css';
+import TabelaGrande from './partials/TabelaGrande';
+import TabelaPequena from './partials/TabelaPequena';
 
 function Diario() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
-  return (
-    <div className="container">
-      <Header toggleSidebar={toggleSidebar} />
-      <div className="main">
-        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+    const [alunos, setAlunos] = useState([
+        {
+            id: 1,
+            nome: 'Guilherme de Albuquerque Sousa',
+            prova: '8.5',
+            trabalho: '9.0',
+            extra: '1.0',
+            recuperacao: '7.5',
+            media: '8.0',
+            frequencia: '95%',
+        },
+        {
+            id: 2,
+            nome: 'Rodrigo Souza Lopes de Andrade',
+            prova: '8.5',
+            trabalho: '9.0',
+            extra: '1.0',
+            recuperacao: '7.5',
+            media: '8.0',
+            frequencia: '95%',
+        },
+        {
+            id: 3,
+            nome: 'Murilo de Medeiros Viana',
+            prova: '8.5',
+            trabalho: '9.0',
+            extra: '1.0',
+            recuperacao: '7.5',
+            media: '8.0',
+            frequencia: '95%',
+        },
+        {
+            id: 4,
+            nome: 'João Henrique Valente Pereira',
+            prova: '8.5',
+            trabalho: '9.0',
+            extra: '1.0',
+            recuperacao: '7.5',
+            media: '8.0',
+            frequencia: '95%',
+        },
+        {
+            id: 5,
+            nome: 'Jonas da Silva Melo',
+            prova: '8.5',
+            trabalho: '9.0',
+            extra: '1.0',
+            recuperacao: '7.5',
+            media: '8.0',
+            frequencia: '95%',
+        },
+    ]);
+
+    // Função para buscar a lista de alunos
+    const fetchAlunos = async () => {
+        try {
+            const response = await fetch('/api/alunos'); // Substitir pela rota da API
+            if (!response.ok) {
+                throw new Error('Erro ao buscar dados dos alunos');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro ao buscar dados dos alunos:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        fetchAlunos()
+            .then((alunosData) => {
+                setAlunos(alunosData);
+            })
+            .catch((error) => {
+                // Lidar com erros aqui
+            });
+    }, []);
+
+    return (
+        <div className="container">
+            <Header toggleSidebar={toggleSidebar} />
+            <div className="main">
+                <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
                 <main className="content">
                     <h1>Diário de Classe Eletrônico</h1>
-                    <div className="large-screen">
+                    <div>
                         <form action="" method="post">
                             <div className="select-turmas">
-                                <label for="turma-select">Turma:</label>
-                                <select id="turma-select">
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="turma1">Turma 1</option>
-                                    <option value="turma2">Turma 2</option>
-                                </select>
-                                <label for="bimestre-select">Bimestre:</label>
-                                <select id="bimestre-select">
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="bimestre1">1º Bimestre</option>
-                                    <option value="bimestre2">2° Bimestre</option>
-                                </select>
+                                <div className="turmas">
+                                    <label for="turma-select">Turma:</label>
+                                    <select id="turma-select">
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="turma1">Turma 1</option>
+                                        <option value="turma2">Turma 2</option>
+                                    </select>
+                                </div>
+                                <div className="bimestres">
+                                    <label for="bimestre-select">Bimestre:</label>
+                                    <select id="bimestre-select">
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="bimestre1">1º Bimestre</option>
+                                        <option value="bimestre2">2° Bimestre</option>
+                                    </select>
+                                </div>
                             </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nome do Aluno</th>
-                                        <th>Prova</th>
-                                        <th>Trabalho</th>
-                                        <th>Extra</th>
-                                        <th>Recuperação</th>
-                                        <th>Média</th>
-                                        <th>Freq.(%)</th>
-                                        <th>Observações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Guilherme de Albuquerque Sousa</td>
-                                        <td><input type="text" className="nota-prova" value="8.5"/></td>
-                                        <td><input type="text" className="nota-trabalho" value="9.0"/></td>
-                                        <td><input type="text" className="ponto-extra" value="1.0"/></td>
-                                        <td><input type="text" className="nota-recuperacao" value="7.5"/></td>
-                                        <td><span className="media-bimestre">8.0</span></td>
-                                        <td><input type="text" className="frequencia" value="95%"/></td>
-                                        <td><textarea className="observacoes">Observações sobre o aluno...</textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td>João Henrique Valente Pereira</td>
-                                        <td><input type="text" className="nota-prova" value="8.5"/></td>
-                                        <td><input type="text" className="nota-trabalho" value="9.0"/></td>
-                                        <td><input type="text" className="ponto-extra" value="1.0"/></td>
-                                        <td><input type="text" className="nota-recuperacao" value="7.5"/></td>
-                                        <td><span className="media-bimestre">8.0</span></td>
-                                        <td><input type="text" className="frequencia" value="95%"/></td>
-                                        <td><textarea className="observacoes">Observações sobre o aluno...</textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonas da Silva Melo</td>
-                                        <td><input type="text" className="nota-prova" value="8.5"/></td>
-                                        <td><input type="text" className="nota-trabalho" value="9.0"/></td>
-                                        <td><input type="text" className="ponto-extra" value="1.0"/></td>
-                                        <td><input type="text" className="nota-recuperacao" value="7.5"/></td>
-                                        <td><span className="media-bimestre">8.0</span></td>
-                                        <td><input type="text" className="frequencia" value="95%"/></td>
-                                        <td><textarea className="observacoes">Observações sobre o aluno...</textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Murilo de Medeiros Viana</td>
-                                        <td><input type="text" className="nota-prova" value="8.5"/></td>
-                                        <td><input type="text" className="nota-trabalho" value="9.0"/></td>
-                                        <td><input type="text" className="ponto-extra" value="1.0"/></td>
-                                        <td><input type="text" className="nota-recuperacao" value="7.5"/></td>
-                                        <td><span className="media-bimestre">8.0</span></td>
-                                        <td><input type="text" className="frequencia" value="95%"/></td>
-                                        <td><textarea className="observacoes">Observações sobre o aluno...</textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rodrigo Souza Lopes de Andrade</td>
-                                        <td><input type="text" className="nota-prova" value="8.5"/></td>
-                                        <td><input type="text" className="nota-trabalho" value="9.0"/></td>
-                                        <td><input type="text" className="ponto-extra" value="1.0"/></td>
-                                        <td><input type="text" className="nota-recuperacao" value="7.5"/></td>
-                                        <td><span className="media-bimestre">8.0</span></td>
-                                        <td><input type="text" className="frequencia" value="95%"/></td>
-                                        <td><textarea className="observacoes">Observações sobre o aluno...</textarea></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <TabelaGrande alunos={alunos} />
+                            <TabelaPequena alunos={alunos} />
                             <button id='btnEdit' type="submit">Salvar Alterações</button>
                             <button id='btnDelete' type="delete">Descartar Alterações</button>
                         </form>

@@ -4,11 +4,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
+
   name: {
     type: String,
     trim: true,
     default: ''
   },
+
   email: {
     type: String,
     trim: true,
@@ -16,18 +18,27 @@ const UserSchema = new mongoose.Schema({
     match: [/.+\@.+\..+/, 'Por favor, preencha um e-mail válido'],
     required: 'E-mail é obrigatório'
   },
+
   password: {
     type: String,
     required: 'Senha é obrigatória'
   },
+
+  telephone: {
+    type: Number,
+    match: [/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/gm],
+  },
+
   updated: {
     type: Date,
     default: Date.now
   },
+
   created: {
     type: Date,
     default: Date.now
   },
+
   role: {
     type: String,
     enum: ['discente', 'docente', 'funcionario', 'coordenacao', 'administracao'],

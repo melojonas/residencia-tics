@@ -9,9 +9,9 @@ function Sidebar({ isSidebarOpen }) {
                 <i className="zmdi zmdi-landscape"></i>
             </span>
             <ul>
-                <li><Link to="/">Início</Link></li>
-                <li><Link to="/Administracao">Administração de Usuários</Link></li>
-                <li><Link to="/Diario">Diário</Link></li>
+                <li><Link to="/home">Início</Link></li>
+                <li><Link to="/administracao">Administração de Usuários</Link></li>
+                <li><Link to="/diario">Diário</Link></li>
                 <li><a href="#">Calendário</a></li>
                 <li><a href="#">Notas</a></li>
                 <li><a href="#">Atividades</a></li>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../css/App.css';
 import '../css/Cadastro.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -15,17 +15,24 @@ const api = axios.create({
 
 function Cadastro() {
 
-    const navigate = useNavigate();
-    
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
+    const [confirmPassword, SetConfirmPw] = useState('');
 
-async function CriarUsuario(){
-       await api.post("http://localhost:8080/auth/cadastro", {
-         email,
-         password
-}).then((response) => {let dados = response.data; navigate("/") }).catch((error) =>{console.log(error)})};
+    const handleCadastroClick = () => {
+        if (password === confirmPassword) {
+            CriarUsuario();
+        } else {
+            alert('As senhas não coincidem. Por favor, verifique.');
+        }
+    };
 
+    function CriarUsuario() {
+        api.post("http://localhost:8080/cadastro", {
+            email,
+            password
+        }).then((response) => { console.log(response) }).catch((error) => { console.log(error) })
+    };
 
     return (
         <div className="container">
@@ -57,24 +64,47 @@ async function CriarUsuario(){
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="email" name="email" placeholder="Usuário" onChange= {event => SetNewEmail(event.target.value)}/>
+                            <input
+                                className="input"
+                                type="email"
+                                name="email"
+                                placeholder="Usuário"
+                                onChange={event => SetNewEmail(event.target.value)}
+                            />
                             <span className="focus-input" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="password" name="password" placeholder="Senha" onChange={event => SetNewPw(event.target.value)} />
+                            <input
+                                className="input"
+                                type="password"
+                                name="password"
+                                placeholder="Senha"
+                                onChange={event => SetNewPw(event.target.value)}
+                            />
+                            <span className="focus-input" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div className="wrap-input validate-input">
+                            <input
+                                className="input"
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirme a senha"
+                                onChange={(event) => SetConfirmPw(event.target.value)}
+                            />
                             <span className="focus-input" data-placeholder="&#xf191;"></span>
                         </div>
 
                         <div className="container-cadastro-form-btn">
-                            <button type="button" onClick={CriarUsuario} className="cadastro-form-btn">
+                            <button onClick={handleCadastroClick} className="cadastro-form-btn">
                                 Cadastrar
                             </button>
                         </div>
 
                         <div className="text-center">
-                            <a className="txt1" href="/">
-                                Já tem uma conta? Faça o login.
+                            <a className="txt1">
+                                <Link to="/Login">Já tem uma conta? Faça o login.</Link>
                             </a>
                         </div>
                     </form>

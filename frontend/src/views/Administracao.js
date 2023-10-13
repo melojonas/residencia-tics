@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import '../css/App.css';
-import '../css/Usuarios.css';
+import React, { useState, useEffect } from 'react';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
+import '../css/Usuarios.css';
+import '../css/App.css';
 
 function Usuarios() {
 
@@ -41,7 +41,7 @@ function Usuarios() {
 
     const [activeTable, setActiveTable] = useState('tabelaGeral');
     const [users, setUsers] = useState(exampleUsers);
-    // const [users, setUsers] = useState([]);
+    //const [users, setUsers] = useState([]);
 
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {
@@ -69,8 +69,63 @@ function Usuarios() {
     };
 
     const handleImportButtonClick = () => {
-        // Implementar a lógica para importar uma planilha
-        console.log('Botão Importar Planilha clicado');
+        const fileInput = document.getElementById('fileInput');
+        fileInput.click();
+    };
+
+    const handleFileInputChange = async (event) => {
+        const file = event.target.files[0];
+
+        if (!file) {
+            return; // Nenhum arquivo selecionado
+        }
+
+        try {
+            // Realizar o processamento do arquivo e extrair os dados
+            const newUserData = await processFile(file);
+
+            // Atualizar o estado dos usuários, adicionando os novos dados à lista existente
+            setUsers((prevUsers) => [...prevUsers, ...newUserData]);
+
+            // Limpar o valor do campo de entrada de arquivo
+            event.target.value = '';
+        } catch (error) {
+            console.error('Erro ao processar o arquivo:', error);
+            // Tratar erros aqui
+        }
+    };
+
+
+    const processFile = async (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                try {
+                    // Processar o conteúdo do arquivo
+                    const content = event.target.result;
+                    const userData = parseCSV(content);
+                    resolve(userData);
+                } catch (error) {
+                    reject(error);
+                }
+            };
+
+            reader.readAsText(file);
+        });
+    };
+
+    const parseCSV = (csvContent) => {
+        //lógica de análise de CSV
+        const lines = csvContent.split('\n');
+        const userData = [];
+
+        for (let i = 1; i < lines.length; i++) {
+            const [nome, funcao, email] = lines[i].split(',');
+            userData.push({ nome, funcao, email });
+        }
+
+        return userData;
     };
 
     // Filtrar usuários com base na função correspondente à tabela ativa
@@ -134,8 +189,6 @@ function Usuarios() {
                     </header>
                     <section id="user-list">
                         <h2>Lista de Usuários</h2>
-
-                        {/* Renderize a tabela com base no valor de activeTable */}
                         <table id={activeTable}>
                             <thead>
                                 <tr>
@@ -159,11 +212,16 @@ function Usuarios() {
                                 ))}
                             </tbody>
                         </table>
-
                         <button id="btnAddUser" onClick={handleAddUserClick}>
                             Adicionar Novo Usuário
                         </button>
-                        <input type="file" id="fileInput" style={{ display: 'none' }} accept=".xlsx, .xls, .csv" />
+                        <input
+                            type="file"
+                            id="fileInput"
+                            style={{ display: 'none' }}
+                            accept=".xlsx, .xls, .csv"
+                            onChange={(event) => handleFileInputChange(event)}
+                        />
                         <button id="importButton" onClick={handleImportButtonClick}>
                             Importar Planilha
                         </button>
