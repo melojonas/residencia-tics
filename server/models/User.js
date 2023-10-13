@@ -1,7 +1,5 @@
-/* Modelo de usuário */
-
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -30,7 +28,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['discente', 'docente', 'coordenacao', 'administracao'],
+    enum: ['discente', 'docente', 'funcionario', 'coordenacao', 'administracao'],
     default: 'discente'
   },
 });
@@ -67,4 +65,4 @@ UserSchema.methods = {
   }
 };
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

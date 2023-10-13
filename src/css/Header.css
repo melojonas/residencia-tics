@@ -1,0 +1,42 @@
+.topbar {
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 0px 20px;
+    border-radius: 10px;
+    color:white;
+    padding: 10px 15px 10px 10px;
+    justify-content: flex-end;
+    background: -webkit-linear-gradient(top, #192bcf, #192bcf);
+    background: -o-linear-gradient(top, #192bcf, #192bcf);
+    background: -moz-linear-gradient(top, #192bcf, #192bcf);
+    background: #192bcf;
+}
+
+.topbar-content {
+    display: flex;
+    align-items: center;
+}
+
+.topbar-content a {
+    margin-right: 10px;
+}
+
+.topbar-content img {
+    max-width: 40px;
+    max-height: 40px;
+    filter: invert(1);
+}
+
+.mobile-menu-button {
+    position: absolute;
+    left: 40px;
+    top: 29px;
+}
+
+#menu-toggle{
+    color: white;
+    border: none;
+    padding: 0;
+    font-size: 25px;
+    cursor: pointer;
+}

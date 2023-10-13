@@ -1,7 +1,6 @@
-// Import the User model
-const User = require('../models/User');
-const extend = require('lodash/extend');
-const bcrypt = require('bcrypt');
+import User from '../models/User';
+import extend from 'lodash/extend';
+import bcrypt from 'bcrypt';
 
 // Function to list all users
 const listUsers = async (req, res) => {
@@ -18,6 +17,7 @@ const createUser = async (req, res, next) => {
     const user = new User();
 
     user.email = body.email;
+    user.password = body.password;
     user.name = body.name || '';
     user.role = body.role || 'discente';
 
@@ -31,7 +31,8 @@ const createUser = async (req, res, next) => {
         await user.save();
         res.status(201).json({
             message: "Usuário cadastrado com sucesso!"
-        });
+        }); 
+        
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -55,7 +56,7 @@ const getUserById = async (req, res, next, id) => {
 
 // Function to read a user by id
 const readUser = (req, res) => {
-    return res.json(req.profile);
+    res.json(req.profile);
 };
 
 // Function to update a user's information
@@ -88,7 +89,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     listUsers,
     createUser,
     getUserById,

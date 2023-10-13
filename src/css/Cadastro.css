@@ -1,0 +1,354 @@
+.container-cadastro {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.container-cadastro::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.wrap-cadastro {
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 25px 55px 37px 55px;
+    background: #192bcf;
+}
+
+.cadastro-form {
+    width: 100%;
+}
+
+.cadastro-form-logo {
+    font-size: 60px;
+    color: #333333;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.zmdi {
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.zmdi-landscape:before {
+    content: url(../images/RIOPREFEITURA.png) !important;
+}
+
+.cadastro-form-title {
+    font-family: Poppins-Medium;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    padding-top: 27px;
+    padding-bottom: 34px;
+}
+
+.validate-input {
+    position: relative;
+}
+
+.wrap-input {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.24);
+    margin-bottom: 30px;
+}
+
+.input {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 38px;
+}
+
+.input::placeholder{
+    color: white;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+[role=button], a, area, button, input, label, select, summary, textarea {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.focus-input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.focus-input::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    background: #fff;
+}
+
+.focus-input::after {
+    font-family: Material-Design-Iconic-Font;
+    font-size: 22px;
+    color: #fff;
+    content: attr(data-placeholder);
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 6px;
+    left: 0px;
+    padding-left: 5px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.label-checkbox::before {
+    content: "\f26b";
+    font-family: Material-Design-Iconic-Font;
+    font-size: 13px;
+    color: transparent;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: #fff;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.container-cadastro-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cadastro-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background: #192bcf;
+    position: relative;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+button, select {
+    text-transform: none;
+}
+
+.cadastro-form-btn::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.text-center {
+    text-align: center;
+    padding-top: 50px
+}
+
+.text-center {
+    text-align: center!important;
+}
+
+.txt1 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #e5e5e5;
+    line-height: 1.5;
+}
+
+a {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: white;
+    margin: 0px;
+    transition: all 0.4s;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.divider-text {
+    flex: 1;
+    height: 1px;
+    color: white;
+    background-color: rgba(255,255,255,0.24);
+    text-align: center;
+    margin: 0 10px;
+}
+
+.social-button {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.social-button a{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.google-btn,
+.facebook-btn,
+.microsoft-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.google-btn img,
+.facebook-btn img,
+.microsoft-btn img {
+    width: 30px;
+    height: 30px;
+}
+
+.google-btn,
+.facebook-btn,
+.microsoft-btn {
+    background-color: white;
+}
+
+.google-btn:hover,
+.facebook-btn:hover,
+.microsoft-btn:hover {
+    background-color: #333;
+}

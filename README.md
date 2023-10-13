@@ -1,92 +1,78 @@
-# Sistema de Gerenciamento Escolar - README
+# GitHub Codespaces ♥️ React
 
-1. [Árvore do Repositório](https://github.com/melojonas/residencia-tics/tree/main#%C3%A1rvore-do-reposit%C3%B3rio)
-2. [Desenvolvimento Colaborativo no GitHub](https://github.com/melojonas/residencia-tics/tree/main#desenvolvimento-colaborativo-no-github)
+Welcome to your shiny new Codespace running React! We've got everything fired up and running for you to explore React.
 
-## Árvore do Repositório
+You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
 
-```
-residencia-tics
-├─ README.md
-├─ client
-│  ├─ public
-│  │  ├─ css
-│  │  │  └─ style.css
-│  │  └─ js
-│  │     └─ script.js
-│  └─ src
-│     ├─ app.js
-│     ├─ index.js
-│     └─ views
-│        ├─ index.ejs
-│        └─ partials
-│           └─ header.ejs
-├─ package-lock.json
-├─ package.json
-└─ server
-   ├─ app.js
-   ├─ config
-   │  ├─ database.js
-   │  ├─ server.js
-   │  └─ tsconfig.json
-   ├─ controllers
-   │  └─ authController.js
-   ├─ models
-   │  └─ user.js
-   └─ routes
-      └─ auth.js
-```
+Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
 
-## Desenvolvimento Colaborativo no GitHub
+This project was bootstrapped for you with [Create React App](https://github.com/facebook/create-react-app).
 
-Nós adotamos um fluxo de trabalho baseado no modelo de *branching* (ramificação) para facilitar o desenvolvimento colaborativo. O fluxo geral inclui os seguintes passos:
+## Available Scripts
 
-1. **Clone**: Clone este repositório para sua máquina local utilizando o comando:
-```
-git clone https://github.com/melojonas/residencia-tics.git
-```
+In the project directory, you can run:
 
-2. **Crie uma Branch**: Antes de começar a fazer alterações, crie uma nova branch a partir da branch `main` com um nome descritivo para a funcionalidade que você está trabalhando:
-```
-git checkout -b nome-da-minha-feature
-```
+### `npm start`
 
-3. **Desenvolva**: Faça as modificações necessárias no código, adicionando, modificando ou excluindo arquivos conforme necessário.
+We've already run this for you in the `Codespaces: server` terminal window below. If you need to stop the server for any reason you can just run `npm start` again to bring it back online.
 
-4. **Commits**: Após realizar suas alterações, faça commits de maneira atômica e descritiva. Isso ajuda a manter um histórico claro das mudanças. Utilize mensagens de commit significativas:
-```
-git commit -m "Adiciona recurso de login"
-```
-5. **Testes Locais**: Antes de enviar suas alterações, certifique-se de testar localmente para evitar que problemas sejam introduzidos no repositório.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) in the built-in Simple Browser (`Cmd/Ctrl + Shift + P > Simple Browser: Show`) to view your running application.
 
-6. **Push**: Envie suas alterações para o repositório remoto na sua branch:
-```
-git push origin nome-da-minha-feature
-```
+The page will reload automatically when you make changes.\
+You may also see any lint errors in the console.
 
-7. **Pull Request (PR)**: Abra um Pull Request detalhando as mudanças que você fez. Isso iniciará uma discussão sobre suas alterações, permitindo revisões por outros membros da equipe.
+### `npm test`
 
-8. **Revisões e Discussões**: Outros membros da equipe irão revisar o seu código, fazer comentários e sugerir alterações. Este é um passo importante para garantir a qualidade do código.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-9. **Testes e Integração**: O código no seu Pull Request será testado em um ambiente de integração para garantir que não afete negativamente o projeto como um todo.
+### `npm run build`
 
-10. **Implantação**: Uma vez que o Pull Request seja aprovado e todas as verificações estejam passando, suas alterações serão mescladas na branch `main` e o sistema será implantado em produção.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Testes e Implantações
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Priorizamos a qualidade do código e a estabilidade do sistema. Para garantir isso, seguimos estas práticas:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- **Testes Unitários**: Cada funcionalidade nova ou alterada deve ser acompanhada por testes unitários adequados para garantir seu funcionamento correto.
+### `npm run eject`
 
-- **Testes de Integração**: Além dos testes unitários, também realizamos testes de integração para verificar a funcionalidade do sistema como um todo.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- **Ambiente de Testes**: Mantemos um ambiente de teste onde as alterações podem ser implantadas para testes mais amplos antes de serem implantadas em produção.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Mantendo a Comunicação
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-Nós utilizamos as issues do GitHub para rastrear tarefas, bugs e melhorias. Sinta-se à vontade para abrir uma issue para qualquer questão que você encontrar no caminho.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-Lembre-se, sua contribuição é valiosa para o sucesso deste projeto. Obrigado por ser parte da equipe!
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-**Grupo Manhattan**
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

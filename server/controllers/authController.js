@@ -1,7 +1,6 @@
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
-const { expressjwt } = require('express-jwt');
-const User = require('../models/User');
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import User from '../models/User';
 
 dotenv.config();
 
@@ -76,9 +75,12 @@ const isAuthorized = (req, res, next) => {
     next();
 };
 
-module.exports = {
+export default {
     login,
-    logout,
+    logout
+}
+
+export {
     isAuthenticated,
     isAuthorized
 };
