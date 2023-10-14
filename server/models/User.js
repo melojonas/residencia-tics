@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 

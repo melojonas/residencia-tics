@@ -32,7 +32,7 @@ const login = async (req, res) => {
 
         // Return the response with the user and token
         const { _id, name, email } = user;
-        return res.json({ token, user: { _id, name, email } });
+        return res.json({ user: { _id, name, email } });
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -66,7 +66,7 @@ const isAuthenticated = (req, res, next) => {
 
 // Authorization middleware
 const isAuthorized = (req, res, next) => {
-    const user = req.profile && req.auth && req.profile._id == req.auth._id;
+    const user = req.profile && req.auth && req.profile._id === req.auth._id;
     if (!user) {
         return res.status(403).json({
             error: 'Acesso negado.'
@@ -75,12 +75,9 @@ const isAuthorized = (req, res, next) => {
     next();
 };
 
-export default {
-    login,
-    logout
-}
-
 export {
+    login,
+    logout,
     isAuthenticated,
     isAuthorized
 };
