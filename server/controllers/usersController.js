@@ -89,11 +89,22 @@ const deleteUser = async (req, res) => {
     }
 };
 
-export default {
+// Function to list only users with role 'discente'
+const listDiscentes = async (req, res) => {
+    try {
+        const users = await User.find({ role: "Discente" }).select('-hashed_password -__v');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export {
     listUsers,
     createUser,
     getUserById,
     readUser,
     updateUser,
     deleteUser,
+    listDiscentes
 };

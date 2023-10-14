@@ -7,6 +7,9 @@ import { Cadastro } from './pages/Cadastro';
 import { Diario } from './pages/Diario';
 import { Frequencia } from './pages/Frequencia';
 import { Usuarios } from './pages/Usuarios';
+import { Anotacoes } from './pages/Anotacoes';
+import { RequestToken } from './pages/RequestToken';
+import { VerifyToken } from './pages/VerifyToken';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/diario" element={<Diario />} />
         <Route path="/frequencia" element={<Frequencia />} />
         <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/anotacoes/:alunoId" element={<Anotacoes />} />
+        <Route path="/Requesttoken" element={<RequestToken />} />
+        <Route path="/Verifytoken" element={<VerifyToken />} />
       </Routes>
     </>
   );

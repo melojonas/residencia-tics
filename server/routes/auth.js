@@ -1,6 +1,6 @@
 import express from 'express';
 import { login, logout } from '../controllers/authController';
-import usersController from '../controllers/usersController';
+import { createUser } from '../controllers/usersController';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.post('/cadastro', (req, res) => {
-    usersController.createUser(req,res);
+    createUser(req,res);
 });
 
 router.get('/logout', function(req, res, next) {

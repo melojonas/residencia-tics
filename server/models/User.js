@@ -30,8 +30,8 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['discente', 'docente', 'funcionario', 'coordenacao', 'administracao'],
-    default: 'discente'
+    enum: ['Discente', 'Docente', 'Coordenação', 'Administração'],
+    default: 'Discente'
   },
 });
 

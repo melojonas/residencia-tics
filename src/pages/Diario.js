@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../css/App.css';
+import '../css/Diario.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import '../css/Diario.css';
-import '../css/App.css';
 import TabelaGrande from '../components/TabelaGrande';
 import TabelaPequena from '../components/TabelaPequena';
 
@@ -18,7 +18,7 @@ export const Diario = () => {
     // Função para buscar a lista de alunos
     const fetchAlunos = async () => {
         try {
-            const response = await fetch('/api/users'); // Substitir pela rota da API
+            const response = await fetch('/api/users/discentes');
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados dos alunos');
             }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TabelaGrande({ alunos }) {
     return (
@@ -16,8 +17,8 @@ function TabelaGrande({ alunos }) {
             </thead>
             <tbody>
                 {alunos.map((aluno) => (
-                    <tr key={aluno.id}>
-                        <td>{aluno.nome}</td>
+                    <tr key={aluno._id}>
+                        <td><Link to={`/anotacoes/${aluno._id}`}>{aluno.name}</Link></td>
                         <td><input type="text" className="nota-prova" value={aluno.prova} /></td>
                         <td><input type="text" className="nota-trabalho" value={aluno.trabalho} /></td>
                         <td><input type="text" className="ponto-extra" value={aluno.extra} /></td>

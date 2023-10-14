@@ -1,13 +1,10 @@
-/* Adicione isso ao seu arquivo CSS */
 @media (max-width: 768px) {
     .large-screen {
         display: none;
-        /* Oculta a tabela */
     }
 
     .responsive-table {
         display: block !important;
-        /* Exibe a lista como um bloco */
     }
 
     .content {
@@ -35,7 +32,6 @@
 
 .responsive-table {
     display: none;
-    /* Exibe a lista como um bloco */
 }
 
 #turma-select,

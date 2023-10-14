@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TabelaPequena({ alunos }) {
     return (
@@ -7,7 +8,7 @@ function TabelaPequena({ alunos }) {
                 <table key={aluno.id} className="aluno-item">
                     <tbody>
                         <tr>
-                            <th colspan="2" className="student-name">{aluno.nome}</th>
+                            <th colspan="2" className="student-name"><Link to={`/anotacoes/${aluno.id}`}>{aluno.name}</Link></th>
                         </tr>
                         <tr>
                             <th>Prova</th>

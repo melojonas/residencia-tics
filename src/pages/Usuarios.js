@@ -9,7 +9,7 @@ export const Usuarios = () => {
     const [activeTable, setActiveTable] = useState('tabelaGeral');
     const [users, setUsers] = useState([]);
 
-    // Simula a busca de dados do usuário
+    // Busca de dados do usuário
     const fetchUserData = async () => {
         try {
             const response = await fetch('/api/users');
@@ -87,8 +87,8 @@ export const Usuarios = () => {
         const userData = [];
 
         for (let i = 1; i < lines.length; i++) {
-            const [nome, funcao, email] = lines[i].split(',');
-            userData.push({ nome, funcao, email });
+            const [name, role, email] = lines[i].split(',');
+            userData.push({ name, role, email });
         }
 
         return userData;
@@ -98,11 +98,11 @@ export const Usuarios = () => {
     const filteredUsers = users.filter((user) => {
         if (activeTable === 'tabelaGeral') {
             return true; // Mostrar todos os usuários
-        } else if (activeTable === 'tabelaAlunos' && user.funcao === 'Aluno') {
+        } else if (activeTable === 'tabelaAlunos' && user.role === 'Discente') {
             return true; // Mostrar apenas alunos
-        } else if (activeTable === 'tabelaProfessores' && user.funcao === 'Professor') {
+        } else if (activeTable === 'tabelaProfessores' && user.role === 'Docente') {
             return true; // Mostrar apenas professores
-        } else if (activeTable === 'tabelaFuncionarios' && user.funcao === 'Funcionário') {
+        } else if (activeTable === 'tabelaFuncionarios' && (user.role === 'Administração' || user.role === 'Coordenação')) {
             return true; // Mostrar apenas funcionários
         }
         return false; // Ocultar outros casos
@@ -135,14 +135,14 @@ export const Usuarios = () => {
                                 onClick={() => handleButtonClick('tabelaAlunos')}
                                 className={activeTable === 'tabelaAlunos' ? 'active' : ''}
                             >
-                                Alunos
+                                Discentes
                             </button>
                             <button
                                 id="btnProfessores"
                                 onClick={() => handleButtonClick('tabelaProfessores')}
                                 className={activeTable === 'tabelaProfessores' ? 'active' : ''}
                             >
-                                Professores
+                                Docentes
                             </button>
                             <button
                                 id="btnFuncionarios"
@@ -166,9 +166,9 @@ export const Usuarios = () => {
                             </thead>
                             <tbody>
                                 {filteredUsers.map((user) => (
-                                    <tr key={user.id}>
-                                        <td>{user.nome}</td>
-                                        <td>{user.funcao}</td>
+                                    <tr key={user._id}>
+                                        <td>{user.name}</td>
+                                        <td>{user.role}</td>
                                         <td>{user.email}</td>
                                         <td>
                                             <button className="btnEdit">Editar</button>

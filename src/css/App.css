@@ -22,7 +22,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  transition: all 0.5s; 
+  transition: all 0.4s; 
 }
 
 body,
@@ -74,4 +74,3 @@ html {
   background: -moz-linear-gradient(top, #192bcf, #192bcf);
   background: #192bcf;
 }
-
