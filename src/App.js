@@ -1,21 +1,22 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Home } from './pages/Home';
-import { Login } from './pages/Login';
+import { Anotacoes } from './pages/Anotacoes';
 import { Cadastro } from './pages/Cadastro';
 import { Diario } from './pages/Diario';
 import { Frequencia } from './pages/Frequencia';
-import { Usuarios } from './pages/Usuarios';
-import { Anotacoes } from './pages/Anotacoes';
+import { Home } from './pages/Home';
 import { RequestToken } from './pages/RequestToken';
+import { Usuarios } from './pages/Usuarios';
 import { VerifyToken } from './pages/VerifyToken';
+const { Login } = require ('./pages/Login')
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/diario" element={<Diario />} />
