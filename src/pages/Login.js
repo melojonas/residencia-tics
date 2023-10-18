@@ -5,9 +5,6 @@ import '../css/App.css';
 import '../css/Login.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
 import '../fonts/iconic/css/material-design-iconic-font.min.css';
-import facebook from '../images/facebook-logo.svg';
-import google from '../images/google-logo.png';
-import microsoft from '../images/microsoft-logo.svg';
 
 const api = axios.create({
     baseURL: 'http://localhost:8080'
@@ -46,13 +43,13 @@ export default function Login() {
 
                         <div className="social-button">
                             <a href="#" className="google-btn">
-                                <img src={google} alt="Google" />
+                                <i class="zmdi zmdi-google"></i>
                             </a>
                             <a href="#" className="facebook-btn">
-                                <img src={facebook} alt="Facebook" />
+                                <i class="zmdi zmdi-facebook"></i>
                             </a>
                             <a href="#" className="microsoft-btn">
-                                <img src={microsoft} alt="Microsoft" />
+                                <i class="zmdi zmdi-microsoft"></i>
                             </a>
                         </div>
                         <div className="divider">

@@ -83,6 +83,25 @@ body {
     content: url(../images/RIOPREFEITURA.png) !important;
 }
 
+.zmdi-google:before {
+    content: url(../img/google-logo.png) !important;
+}
+
+.zmdi-facebook:before {
+    content: url(../img/facebook-logo.png) !important;
+}
+
+.zmdi-microsoft:before {
+    content: url(../img/microsoft-logo.svg) !important;
+}
+
+.zmdi-google,
+.zmdi-facebook,
+.zmdi-microsoft{
+    width: 30px;
+    height: 30px;
+}
+
 .login-form-title {
     font-family: Poppins-Medium;
     font-size: 30px;
