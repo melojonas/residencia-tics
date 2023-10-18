@@ -4,7 +4,7 @@ import '../css/RequestToken.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
 import '../fonts/iconic/css/material-design-iconic-font.min.css';
 
-export const RequestToken = () => {
+export default function RequestToken () {
     return (
         <div className="container">
             <div className="container-request-token" style={{ backgroundImage: 'url(/images/background.jpg)' }}>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Anotacoes } from './pages/Anotacoes';
-import { Cadastro } from './pages/Cadastro';
-import { Diario } from './pages/Diario';
-import { Frequencia } from './pages/Frequencia';
-import { Home } from './pages/Home';
-import { RequestToken } from './pages/RequestToken';
-import { Usuarios } from './pages/Usuarios';
-import { VerifyToken } from './pages/VerifyToken';
-const { Login } = require ('./pages/Login')
+import Anotacoes from './pages/Anotacoes';
+import Cadastro from './pages/Cadastro';
+import Diario from './pages/Diario';
+import Frequencia from './pages/Frequencia';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import RequestToken from './pages/RequestToken';
+import Usuarios from './pages/Usuarios';
+import VerifyToken from './pages/VerifyToken';
 
 function App() {
   return (

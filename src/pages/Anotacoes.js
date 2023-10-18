@@ -1,12 +1,12 @@
 import htmlParser from 'html-react-parser';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../css/App.css';
-import Tiptap from '../components/Tiptap';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Tiptap from '../components/Tiptap';
+import '../css/App.css';
 
-export const Anotacoes = () => {
+export default function Anotacoes () {
     const { alunoId } = useParams();
     const [alunoNome, setAlunoNome] = useState('');
 

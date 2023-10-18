@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import '../css/Home.css';
 import '../css/App.css';
+import '../css/Home.css';
 
-export const Home = () => {
+export default function Home () {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {

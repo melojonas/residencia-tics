@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import '../css/Usuarios.css';
 import '../css/App.css';
+import '../css/Usuarios.css';
 
-export const Usuarios = () => {
+export default function Usuarios () {
 
     const [activeTable, setActiveTable] = useState('tabelaGeral');
     const [users, setUsers] = useState([]);

@@ -8,7 +8,7 @@ import facebook from '../images/facebook-logo.svg';
 import google from '../images/google-logo.png';
 import microsoft from '../images/microsoft-logo.svg';
 
-export const Cadastro = () => {
+export default function Cadastro () {
     return (
         <div className="container">
             <div className="container-cadastro" style={{ backgroundImage: 'url(/images/background.jpg)' }}>

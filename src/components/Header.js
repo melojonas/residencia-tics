@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/Header.css'
-import logo from '../images/perfil-logo.png'
+import '../css/Header.css';
+import logo from '../images/perfil-logo.png';
 
 function Header({ toggleSidebar }) {
     return (
@@ -10,7 +10,7 @@ function Header({ toggleSidebar }) {
             </div>
             <div className="topbar-content">
                 <a href="/login" className="topbar-item">Login</a>
-                <img src={logo} alt="Logo" />
+                <img src={logo} alt="logo" />
             </div>
         </div>
     );

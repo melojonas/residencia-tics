@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import '../css/App.css';
-import '../css/Diario.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TabelaGrande from '../components/TabelaGrande';
 import TabelaPequena from '../components/TabelaPequena';
+import '../css/App.css';
+import '../css/Diario.css';
 
-export const Diario = () => {
+export default function Diario () {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {

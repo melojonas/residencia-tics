@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import '../css/Frequencia.css';
 import '../css/App.css';
+import '../css/Frequencia.css';
 
-export const Frequencia = () => {
+export default function Frequencia () {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {

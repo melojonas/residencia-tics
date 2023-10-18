@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import '../css/App.css';
 import '../css/Login.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -8,12 +9,33 @@ import facebook from '../images/facebook-logo.svg';
 import google from '../images/google-logo.png';
 import microsoft from '../images/microsoft-logo.svg';
 
-export const Login = () => {
+const api = axios.create({
+    baseURL: 'http://localhost:8080'
+});
+
+export default function Login() {
+    
+    const navigate = useNavigate()
+
+    const [email, SetNewEmail] = useState('');
+    const [password, SetNewPw] = useState('');
+
+    function LoginUsuario(){
+        api.post("http://localhost:8080/auth/login", {
+          email,
+          password
+    }).then((response) => { let dados = response.data; 
+        console.log(response.data);
+        localStorage.setItem('nome', `${dados.user.name}`);
+        localStorage.setItem('email', `${dados.user.email}`);  
+        navigate('/Home')})
+        .catch((error) =>{console.log(error)})};
+
     return (
         <div className="container">
-            <div className="container-login" style={{ backgroundImage: 'url(/images/background.jpg)' }}>
+            <div className="container-login" style={{ backgroundImage: 'url(/img/background.jpg)' }}>
                 <div className="wrap-login">
-                    <form className="login-form validate-form" method="POST" action="/api/auth/login">
+                    <form className="login-form validate-form" method="POST" action="http://localhost:3000/">
                         <span className="login-form-logo">
                             <i className="zmdi zmdi-landscape"></i>
                         </span>
@@ -38,24 +60,24 @@ export const Login = () => {
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="text" name="email" placeholder="Usuário" autocomplete="email" />
+                            <input className="input" type="text" name="email" placeholder="Usuário" onChange={(event) => SetNewEmail(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="password" name="password" placeholder="Senha" />
+                            <input className="input" type="password" name="password" placeholder="Senha" onChange={(event) => SetNewPw(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf191;"></span>
                         </div>
 
                         <div className="contact-form-checkbox">
                             <input className="input-checkbox" id="ckb1" type="checkbox" />
-                            <label className="label-checkbox" for="ckb1">
+                            <label className="label-checkbox" htmlFor="ckb1">
                                 Lembrar
                             </label>
                         </div>
 
                         <div className="container-login-form-btn">
-                            <button className="login-form-btn">
+                            <button type="button" onClick={LoginUsuario} className="login-form-btn">
                                 Login
                             </button>
                         </div>
@@ -65,8 +87,8 @@ export const Login = () => {
                                 Esqueci minha senha
                             </a>
                             <br />
-                            <a className="txt1">
-                                <Link to="/cadastro">Ainda não tem uma conta? Cadastre-se</Link>
+                            <a className="txt1" href="/cadastro">
+                                Ainda não tem uma conta? Cadastre-se
                             </a>
                         </div>
                     </form>
