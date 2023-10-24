@@ -22,7 +22,7 @@ function AppRoutes() {
                 <Route path="/Requesttoken" element={<RequestToken />} />
                 <Route path="/Verifytoken" element={<VerifyToken />} />
                 <Route path="/Presenca" element={<Presenca />} />
-                <Route path="/anotacoes/:alunoId" element={<Anotacoes />} />
+                <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
             </Routes>
         </Router>
     );

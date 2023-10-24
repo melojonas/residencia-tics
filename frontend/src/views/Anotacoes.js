@@ -1,15 +1,16 @@
-import htmlParser from 'html-react-parser';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../css/App.css';
-import EditorAnotacoes from './partials/EditorAnotacoes';
+import htmlParser from 'html-react-parser';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
+import EditorAnotacoes from './partials/EditorAnotacoes';
+import '../css/App.css';
 
 function Anotacoes() {
-    const { alunoId } = useParams();
-    const [alunoNome, setAlunoNome] = useState('');
-    const alunos = [
+    const { usuarioId } = useParams();
+    const [usuarioNome, setusuarioNome] = useState('');
+    const [tipoUsuario, setTipoUsuario] = useState('');
+    const usuarios = [
         {
             id: 1,
             nome: 'Guilherme de Albuquerque Sousa',
@@ -43,38 +44,39 @@ function Anotacoes() {
     ];
 
     useEffect(() => {
-        // Converte alunoId para número
-        const alunoIdNumber = parseInt(alunoId, 10);
+        // Converte usuarioId para número
+        const usuarioIdNumber = parseInt(usuarioId, 10);
 
-        // Carrega o nome do aluno com base no alunoId
-        const alunoEncontrado = alunos.find((aluno) => aluno.id === alunoIdNumber);
+        // Carrega o nome e o tipo do usuario com base no usuarioId
+        const usuarioEncontrado = usuarios.find((usuario) => usuario.id === usuarioIdNumber);
 
-        if (alunoEncontrado) {
-            setAlunoNome(alunoEncontrado.nome);
+        if (usuarioEncontrado) {
+            setusuarioNome(usuarioEncontrado.nome);
+            setTipoUsuario(usuarioEncontrado.funcao);
         } else {
-            setAlunoNome('Aluno não encontrado'); // Trata o caso em que o aluno não é encontrado
+            setusuarioNome('Usuario não encontrado'); // Trata o caso em que o usuario não é encontrado
         }
-    }, [alunoId]);
+    }, [usuarioId]);
 
     // Estados para as anotações
     const [anotacoes, setAnotacoes] = useState([]);
     const [anotacaoAtual, setAnotacaoAtual] = useState('');
 
-    // Implementar a lógica para carregar as anotações do aluno com base no `alunoId`
+    // Implementar a lógica para carregar as anotações do usuario com base no `usuarioId`
     useEffect(() => {
-        // Exemplo: Carregar as anotações do aluno com alunoId
-        // setAnotacoes(anotacoesDoAluno);
-    }, [alunoId]);
+        // Exemplo: Carregar as anotações do usuario com usuarioId
+        // setAnotacoes(anotacoesDoUsuario);
+    }, [usuarioId]);
 
     const salvarAnotacao = (novaAnotacao) => {
-        // Adiciona a data e hora à anotação
+        // Adiciona a data e hora à anotacao
         const dataAtual = new Date();
         const dataFormatada = dataAtual.toLocaleString();
 
         const anotacaoFormatada = `<h3>${dataFormatada}</h3><p>${novaAnotacao}</p>`;
 
-        // Salvar nova anotação no backend (ou localmente)
-        // Atualizar a lista de anotações
+        // Salvar nova anotacao no backend (ou localmente)
+        // Atualizar a lista de anotacoes
         setAnotacoes([...anotacoes, anotacaoFormatada]);
     };
 
@@ -90,11 +92,11 @@ function Anotacoes() {
             <div className="main">
                 <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
                 <main className="content">
-                    <h1>Anotações do Aluno</h1>
-                    <h2>Aluno: {alunoNome}</h2>
+                    <h1>Anotações do {tipoUsuario === 'Aluno' ? 'Aluno' : tipoUsuario === 'Professor' ? 'Professor' : 'Funcionário'}</h1>
+                    <h2>{usuarioNome}</h2>
                     <div className="anotacoes-container">
                         <div className="editor-container">
-                            <h2 style={{color: 'white'}}>Fazer Anotação</h2>
+                            <h2 style={{ color: 'white' }}>Fazer Anotação</h2>
                             <EditorAnotacoes initialContent={anotacaoAtual} onSave={salvarAnotacao} />
                         </div>
                         <div className="anotacoes-list-container">

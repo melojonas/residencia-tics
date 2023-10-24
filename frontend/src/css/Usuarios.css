@@ -46,3 +46,7 @@ table tr {
     color: white !important;
     border: 3px solid white !important;
 }
+
+a{
+    font-size: 1rem !important;
+}

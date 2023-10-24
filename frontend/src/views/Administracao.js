@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
 import '../css/Usuarios.css';
@@ -201,7 +202,7 @@ function Usuarios() {
                             <tbody>
                                 {filteredUsers.map((user) => (
                                     <tr key={user.id}>
-                                        <td>{user.nome}</td>
+                                        <td><Link to={`/anotacoes/${user.id}`}>{user.nome}</Link></td>
                                         <td>{user.funcao}</td>
                                         <td>{user.email}</td>
                                         <td>
