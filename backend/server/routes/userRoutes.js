@@ -45,8 +45,8 @@ const { isAuthorized, isAuthenticated } = require('../controllers/authController
  */
 
 router.route('/')
-    .post(isAuthenticated, usersController.createUser)
-    .get(isAuthenticated, usersController.listUsers);
+    .post(usersController.createUser)
+    .get(usersController.listUsers);
 
 // Read, Update and Delete Users by ID
 /**

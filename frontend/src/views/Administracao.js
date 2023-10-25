@@ -7,47 +7,13 @@ import '../css/App.css';
 
 function Usuarios() {
 
-    const exampleUsers = [
-        {
-            id: 1,
-            nome: 'Guilherme de Albuquerque Sousa',
-            funcao: 'Aluno',
-            email: 'guilherme@gmail.com',
-        },
-        {
-            id: 2,
-            nome: 'Rodrigo Souza Lopes de Andrade',
-            funcao: 'Aluno',
-            email: 'rodrigo@gmail.com',
-        },
-        {
-            id: 3,
-            nome: 'Murilo de Medeiros Viana',
-            funcao: 'Professor',
-            email: 'murilo@gmail.com',
-        },
-        {
-            id: 4,
-            nome: 'João Henrique Valente Pereira',
-            funcao: 'Funcionário',
-            email: 'joao@gmail.com',
-        },
-        {
-            id: 5,
-            nome: 'Jonas da Silva Melo',
-            funcao: 'Funcionário',
-            email: 'jonas@gmail.com',
-        },
-    ];
-
     const [activeTable, setActiveTable] = useState('tabelaGeral');
-    const [users, setUsers] = useState(exampleUsers);
-    //const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {
         try {
-            const response = await fetch('/api/users'); // Substituir pela rota da API
+            const response = await fetch('http://127.0.0.1:8080/users/'); // Substituir pela rota da API
             const data = await response.json();
             setUsers(data);
         } catch (error) {
@@ -133,11 +99,11 @@ function Usuarios() {
     const filteredUsers = users.filter((user) => {
         if (activeTable === 'tabelaGeral') {
             return true; // Mostrar todos os usuários
-        } else if (activeTable === 'tabelaAlunos' && user.funcao === 'Aluno') {
+        } else if (activeTable === 'tabelaAlunos' && user.role === 'Aluno') {
             return true; // Mostrar apenas alunos
-        } else if (activeTable === 'tabelaProfessores' && user.funcao === 'Professor') {
+        } else if (activeTable === 'tabelaProfessores' && user.role === 'Professor') {
             return true; // Mostrar apenas professores
-        } else if (activeTable === 'tabelaFuncionarios' && user.funcao === 'Funcionário') {
+        } else if (activeTable === 'tabelaFuncionarios' && user.role === 'Funcionário') {
             return true; // Mostrar apenas funcionários
         }
         return false; // Ocultar outros casos
@@ -201,9 +167,9 @@ function Usuarios() {
                             </thead>
                             <tbody>
                                 {filteredUsers.map((user) => (
-                                    <tr key={user.id}>
-                                        <td><Link to={`/anotacoes/${user.id}`}>{user.nome}</Link></td>
-                                        <td>{user.funcao}</td>
+                                    <tr key={user._id}>
+                                        <td><Link to={`/anotacoes/${user._id}`}>{user.name}</Link></td>
+                                        <td>{user.role}</td>
                                         <td>{user.email}</td>
                                         <td>
                                             <button className="btnEdit">Editar</button>
