@@ -44,6 +44,11 @@ const UserSchema = new mongoose.Schema({
     enum: ['Discente', 'Docente', 'Funcionario', 'Direção'],
     default: 'discente'
   },
+
+  changePassword: {
+    type: Boolean,
+    default: false
+  },
 });
 
 UserSchema.pre('save', async function (next) {

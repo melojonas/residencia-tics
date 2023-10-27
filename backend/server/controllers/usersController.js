@@ -2,6 +2,8 @@
 const User = require('../models/User');
 const extend = require('lodash/extend');
 const bcrypt = require('bcrypt');
+const { google } = require('googleapis');
+const OAuth2 = google.auth.OAuth2;
 
 // Function to list all users
 const listUsers = async (req, res) => {
@@ -18,7 +20,6 @@ const createUser = async (req, res, next) => {
     const user = new User();
 
     user.email = body.email;
-    user.password = body.password;
     user.name = body.name || '';
     user.role = body.role || 'discente';
 
@@ -26,6 +27,55 @@ const createUser = async (req, res, next) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(body.password, salt);
         user.password = hash;
+    } else {
+        // Generate a random password
+        const randomPassword = Math.random().toString(36).slice(-8);
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(randomPassword, salt);
+        user.password = hash;
+
+        // Send the password to the user's email
+        const oauth2Client = new OAuth2(
+            process.env.CLIENT_ID,
+            process.env.CLIENT_SECRET,
+            'https://developers.google.com/oauthplayground'
+        );
+
+        oauth2Client.setCredentials({
+            refresh_token: process.env.REFRESH_TOKEN
+        });
+
+        const accessToken = oauth2Client.getAccessToken();
+
+        const smtpTransport = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: process.env.EMAIL,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN,
+                accessToken: accessToken
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Gestão Acadêmica - Senha temporária',
+            text: `Sua senha temporária é ${randomPassword}. Você pode alterá-la na página de perfil.`
+        };
+
+        smtpTransport.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
+        // Flag the user to change the password on the first login
+        user.changePassword = true;
     }
 
     try {
