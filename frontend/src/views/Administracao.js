@@ -179,8 +179,8 @@ function Usuarios() {
                                 ))}
                             </tbody>
                         </table>
-                        <button id="btnAddUser" onClick={handleAddUserClick}>
-                            Adicionar Novo Usuário
+                        <button id="btnAddUser">
+                            <Link style={{ color: 'black' }} to="/adicionar-usuario">Adicionar Novo Usuário</Link>
                         </button>
                         <input
                             type="file"

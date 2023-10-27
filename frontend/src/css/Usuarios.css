@@ -49,4 +49,5 @@ table tr {
 
 a{
     font-size: 1rem !important;
+    line-height: 0 !important;
 }
