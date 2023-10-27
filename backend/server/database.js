@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
-const url = process.env.MONGODBURL;
+const url = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
 

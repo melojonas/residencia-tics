@@ -104,9 +104,9 @@ router.route('/')
  */
 
 router.route('/:user_id')
-    .get(isAuthenticated, usersController.readUser)
-    .put(isAuthenticated, usersController.updateUser)
-    .delete(isAuthenticated, usersController.deleteUser);
+    .get(usersController.readUser)
+    .put(usersController.updateUser)
+    .delete(usersController.deleteUser);
 
 // Middleware para buscar um usuário pelo ID e armazená-lo no objeto req
 router.param('user_id', usersController.getUserById);
