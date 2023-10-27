@@ -10,6 +10,7 @@ import Presenca from '../views/Presenca';
 import RequestToken from '../views/RequestToken';
 import VerifyToken from '../views/VerifyToken';
 import AdicionarUsuario from '../views/AdicionarUsuario';
+import EditarUsuario from '../views/EditarUsuario';
 
 function AppRoutes() {
     return (
@@ -26,6 +27,7 @@ function AppRoutes() {
                 <Route path="/Presenca" element={<Presenca />} />
                 <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
                 <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
+                <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
             </Routes>
         </Router>
     );
