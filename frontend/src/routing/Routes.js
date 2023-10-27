@@ -20,6 +20,7 @@ function AppRoutes() {
                 <Route path="/Administracao" element={<Administracao />} />
                 <Route path="/Avaliacoes" element={<Avaliacoes />} />
                 <Route path="/Cadastro" element={<Cadastro />} />
+                <Route path="/Login" element={<Login />} />
                 <Route path="/Requesttoken" element={<RequestToken />} />
                 <Route path="/Verifytoken" element={<VerifyToken />} />
                 <Route path="/Presenca" element={<Presenca />} />
