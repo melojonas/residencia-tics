@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../css/App.css';
+import '../css/Usuarios.css';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
-import '../css/Usuarios.css';
-import '../css/App.css';
 
 function Usuarios() {
 
@@ -13,7 +13,7 @@ function Usuarios() {
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8080/users/'); // Substituir pela rota da API
+            const response = await fetch('http://127.0.0.1:8080/users'); // Substituir pela rota da API
             const data = await response.json();
             setUsers(data);
         } catch (error) {
@@ -99,9 +99,9 @@ function Usuarios() {
     const filteredUsers = users.filter((user) => {
         if (activeTable === 'tabelaGeral') {
             return true; // Mostrar todos os usuários
-        } else if (activeTable === 'tabelaAlunos' && user.role === 'Aluno') {
+        } else if (activeTable === 'tabelaAlunos' && user.role === 'Discente') {
             return true; // Mostrar apenas alunos
-        } else if (activeTable === 'tabelaProfessores' && user.role === 'Professor') {
+        } else if (activeTable === 'tabelaProfessores' && user.role === 'Docente') {
             return true; // Mostrar apenas professores
         } else if (activeTable === 'tabelaFuncionarios' && user.role === 'Funcionário') {
             return true; // Mostrar apenas funcionários

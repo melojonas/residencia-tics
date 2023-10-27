@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
-const mongoose = require('./database');
+const {connect} = require('./database');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
 const helmet = require('helmet');
@@ -17,6 +17,7 @@ const bcrypt = require("bcrypt");
 const createError = require('http-errors');
 const ejs = require('ejs');
 
+dotenv.config();
 
 
 const indexRoutes = require(path.join(__dirname + '/routes/indexRoutes'));
@@ -26,9 +27,8 @@ const userRoutes = require(path.join(__dirname + '/routes/userRoutes'));
 global.__root = path.resolve(__dirname, '..');
 
 /* MIDDLEWARES */
-dotenv.config();
 
-mongoose.connect();
+connect();
 
 app.use(
   session({

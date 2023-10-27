@@ -69,7 +69,7 @@ function Diario() {
     // Função para buscar a lista de alunos
     const fetchAlunos = async () => {
         try {
-            const response = await fetch('/api/alunos'); // Substitir pela rota da API
+            const response = await fetch('http://127.0.0.1:8080/users'); // Substitir pela rota da API
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados dos alunos');
             }
@@ -101,20 +101,14 @@ function Diario() {
                     <div>
                         <form action="" method="post">
                             <div className="select-turmas">
-                                <div className="turmas">
-                                    <label for="turma-select">Turma:</label>
-                                    <select id="turma-select">
-                                        <option value="" disabled selected>Selecione</option>
-                                        <option value="turma1">Turma 1</option>
-                                        <option value="turma2">Turma 2</option>
-                                    </select>
-                                </div>
                                 <div className="bimestres">
                                     <label for="bimestre-select">Bimestre:</label>
                                     <select id="bimestre-select">
                                         <option value="" disabled selected>Selecione</option>
                                         <option value="bimestre1">1º Bimestre</option>
                                         <option value="bimestre2">2° Bimestre</option>
+                                        <option value="bimestre2">3° Bimestre</option>
+                                        <option value="bimestre2">4° Bimestre</option>
                                     </select>
                                 </div>
                             </div>

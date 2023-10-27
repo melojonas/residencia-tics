@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    enum: ['discente', 'docente', 'funcionario', 'coordenacao', 'administracao'],
+    enum: ['Discente', 'Docente', 'Funcionario', 'Direção'],
     default: 'discente'
   },
 });

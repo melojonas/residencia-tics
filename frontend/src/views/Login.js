@@ -35,7 +35,7 @@ function Login() {
         <div className="container">
             <div className="container-login" style={{ backgroundImage: 'url(/img/background.jpg)' }}>
                 <div className="wrap-login">
-                    <form className="login-form validate-form" method="POST" action="http://localhost:3000/">
+                    <form className="login-form validate-form" method="POST" action="http://localhost:8080/auth/login">
                         <span className="login-form-logo">
                             <i className="zmdi zmdi-landscape"></i>
                         </span>

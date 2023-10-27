@@ -11,10 +11,9 @@ function Sidebar({ isSidebarOpen }) {
             <ul>
                 <li><Link to="/home">Início</Link></li>
                 <li><Link to="/administracao">Administração de Usuários</Link></li>
-                <li><Link to="/diario">Diário</Link></li>
+                <li><Link to="/avaliacoes">Avaliações</Link></li>
+                <li><a href="#">Planejamento Semanal</a></li>
                 <li><a href="#">Calendário</a></li>
-                <li><a href="#">Notas</a></li>
-                <li><a href="#">Atividades</a></li>
                 <li><a href="#">Relatórios</a></li>
             </ul>
             

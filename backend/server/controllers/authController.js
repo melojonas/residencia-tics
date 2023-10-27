@@ -28,7 +28,7 @@ const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWTTOKEN);
 
         // Set the token as a cookie
         res.cookie('t', token, { expire: new Date() + 9999 });
@@ -38,7 +38,7 @@ const login = async (req, res) => {
         res.json({user: {_id : user._id, name: user.name, email: user.email}})
         
     } catch (error) {
-        console.error('error') 
+        console.error(error) 
     }
 };
 

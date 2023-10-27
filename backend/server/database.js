@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 
 const connect = async () => {
   
-  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect('mongodb+srv://gestaoacademica-residenciaTICS:YLf!PLfGbt5RKFhhjk@cluster0.6wdhv8s.mongodb.net/gestaoacademica?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
   const db = mongoose.connection;
   db.on("error", () => {
@@ -17,4 +17,4 @@ const connect = async () => {
   });
 };
 
-module.exports = { connect };
+module.exports = {connect};
