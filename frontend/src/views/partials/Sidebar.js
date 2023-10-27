@@ -9,12 +9,12 @@ function Sidebar({ isSidebarOpen }) {
                 <i className="zmdi zmdi-landscape"></i>
             </span>
             <ul>
-                <li><Link to="/home">Início</Link></li>
-                <li><Link to="/administracao">Administração de Usuários</Link></li>
-                <li><Link to="/avaliacoes">Avaliações</Link></li>
-                <li><a href="#">Planejamento Semanal</a></li>
-                <li><a href="#">Calendário</a></li>
-                <li><a href="#">Relatórios</a></li>
+                <li><Link className='links' to="/home">Início</Link></li>
+                <li><Link className='links' to="/administracao">Administração de Usuários</Link></li>
+                <li><Link className='links' to="/avaliacoes">Avaliações</Link></li>
+                <li><a className='links' href="#">Planejamento Semanal</a></li>
+                <li><a className='links' href="#">Calendário</a></li>
+                <li><a className='links' href="#">Relatórios</a></li>
             </ul>
             
         </nav>

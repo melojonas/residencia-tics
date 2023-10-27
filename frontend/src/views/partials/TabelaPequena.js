@@ -11,11 +11,7 @@ function TabelaPequena({ alunos }) {
                             <th colspan="2" className="student-name"><Link to={`/anotacoes/${aluno.id}`}>{aluno.nome}</Link></th>
                         </tr>
                         <tr>
-                            <th>Prova</th>
-                            <td><input type="text" className="nota-prova" value={aluno.prova} /></td>
-                        </tr>
-                        <tr>
-                            <th>Trabalho</th>
+                            <th>Teste</th>
                             <td><input type="text" className="nota-trabalho" value={aluno.trabalho} /></td>
                         </tr>
                         <tr>
@@ -23,16 +19,8 @@ function TabelaPequena({ alunos }) {
                             <td><input type="text" className="ponto-extra" value={aluno.extra} /></td>
                         </tr>
                         <tr>
-                            <th>Recuperação</th>
-                            <td><input type="text" className="nota-recuperacao" value={aluno.recuperacao} /></td>
-                        </tr>
-                        <tr>
-                            <th>Média</th>
+                            <th>Conceito</th>
                             <td><span className="media-bimestre">{aluno.media}</span></td>
-                        </tr>
-                        <tr>
-                            <th>Freq.(%)</th>
-                            <td><input type="text" className="frequencia" value={aluno.frequencia} /></td>
                         </tr>
                     </tbody>
                 </table>
