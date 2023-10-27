@@ -17,14 +17,14 @@ function AppRoutes() {
         <Router>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/Home" element={<Home />} />
-                <Route path="/Administracao" element={<Administracao />} />
-                <Route path="/Avaliacoes" element={<Avaliacoes />} />
-                <Route path="/Cadastro" element={<Cadastro />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Requesttoken" element={<RequestToken />} />
-                <Route path="/Verifytoken" element={<VerifyToken />} />
-                <Route path="/Presenca" element={<Presenca />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/administracao" element={<Administracao />} />
+                <Route path="/avaliacoes" element={<Avaliacoes />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/requesttoken" element={<RequestToken />} />
+                <Route path="/verifytoken" element={<VerifyToken />} />
+                <Route path="/presenca" element={<Presenca />} />
                 <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
                 <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
                 <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />

@@ -16,8 +16,33 @@ function AdicionarUsuario() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Implementar a lógica para enviar os dados do novo usuário para o servidor.
-        // Redirecionar o usuário de volta para a página de administração após adicionar o usuário.
+        
+        // Create a new user object with the form data
+        const newUser = {
+            name: nome,
+            role: funcao,
+            email
+        };
+
+        // Send a POST request to the server with the new user data
+        fetch('http://localhost:8080/users/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar usuário');
+            }
+            // Redirect the user back to the administration page after adding the user
+            window.location.href = '/administracao';
+        })
+        .catch((error) => {
+            console.error(error);
+            // Handle the error
+        });
     };
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,7 +57,7 @@ function AdicionarUsuario() {
             <div className="main">
                 <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
                 <main className="content">
-                    <h1>Adicionar Novo Usuário</h1>
+                    <h1>Adicionar Usuário</h1>
                     <form onSubmit={handleSubmit}>
                         <div className='involve-input'>
                             <label>Nome:</label>
@@ -46,13 +71,14 @@ function AdicionarUsuario() {
                             <label>Função:</label>
                             <select value={funcao} onChange={(e) => setFuncao(e.target.value)} required>
                                 <option value="" disabled selected>Selecione:</option>
-                                <option value="discente">Discente</option>
-                                <option value="docente">Docente</option>
-                                <option value="funcionario">Funcionário</option>
+                                <option value="Discente">Discente</option>
+                                <option value="Docente">Docente</option>
+                                <option value="Coordenação">Coordenação</option>
+                                <option value="Administração">Administração</option>
                             </select>
                         </div>
                         <div className='involve-input'>
-                            <label>Email:</label>
+                            <label>E-mail:</label>
                             <input className='addInput' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
                         <div className='involve-input'>
