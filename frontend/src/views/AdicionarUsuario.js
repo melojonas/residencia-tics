@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import '../css/App.css';
 import '../css/AdicionarUsuario.css';
 import Header from './partials/Header.js';
@@ -33,15 +34,15 @@ function AdicionarUsuario() {
                 <main className="content">
                     <h1>Adicionar Novo Usuário</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className='wrap-input'>
+                        <div className='involve-input'>
                             <label>Nome:</label>
-                            <input className='input' type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
+                            <input className='addInput' type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
                         </div>
-                        <div className='wrap-input'>
+                        <div className='involve-input'>
                             <label>Matrícula:</label>
-                            <input className='input' type="text" value={matricula} onChange={(e) => setMatricula(e.target.value)} required />
+                            <input className='addInput' type="text" value={matricula} onChange={(e) => setMatricula(e.target.value)} required />
                         </div>
-                        <div className='wrap-input'>
+                        <div className='involve-input'>
                             <label>Função:</label>
                             <select value={funcao} onChange={(e) => setFuncao(e.target.value)} required>
                                 <option value="" disabled selected>Selecione:</option>
@@ -50,17 +51,26 @@ function AdicionarUsuario() {
                                 <option value="funcionario">Funcionário</option>
                             </select>
                         </div>
-                        <div className='wrap-input'>
+                        <div className='involve-input'>
                             <label>Email:</label>
-                            <input className='input' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <input className='addInput' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
-                        <div className='wrap-input'>
-                            <label>Telefone para Contato:</label>
-                            <input className='input' type="text" value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+                        <div className='involve-input'>
+                            <label>Telefone:</label>
+                            <InputMask
+                                className='addInput'
+                                mask="(99) 99999-9999"
+                                maskChar="_"
+                                value={telefone}
+                                onChange={(e) => setTelefone(e.target.value)}
+                                type="text"
+                            />
                         </div>
-                        <button type="submit">Adicionar Usuário</button>
+                        <button id='addUser' type="submit">Adicionar Usuário</button>
                     </form>
-                    <Link to="/administracao">Voltar para a Lista de Usuários</Link>
+                    <button id='backButton'>
+                        <Link to="/administracao">Voltar para a Lista de Usuários</Link>
+                    </button>
                 </main>
             </div>
         </div>

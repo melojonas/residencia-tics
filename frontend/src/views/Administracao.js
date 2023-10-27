@@ -172,7 +172,9 @@ function Usuarios() {
                                         <td>{user.role}</td>
                                         <td>{user.email}</td>
                                         <td>
-                                            <button className="btnEdit">Editar</button>
+                                            <button className="btnEdit">
+                                                <Link style={{ color: 'black' }} to={`/editar-usuario/${user._id}`}>Editar</Link>
+                                            </button>
                                             <button className="btnDelete">Excluir</button>
                                         </td>
                                     </tr>
