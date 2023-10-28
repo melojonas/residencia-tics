@@ -28,7 +28,8 @@ const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWTTOKEN);
+        console.log(process.env.JWT_TOKEN)
+        const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWT_SECRET);
 
         // Set the token as a cookie
         res.cookie('t', token, { expire: new Date() + 9999 });
@@ -41,11 +42,6 @@ const login = async (req, res) => {
         console.error(error) 
     }
 };
-
-const returnDataToken = (req, res) => {
-    
-};
-
 
 const logout = (req, res) => {
     // Limpar o cookie de autenticação
@@ -83,7 +79,6 @@ const isAuthorized = (req, res, next) => {
 
 
 module.exports = {
-    returnDataToken,
     login,
     logout,
     isAuthenticated,

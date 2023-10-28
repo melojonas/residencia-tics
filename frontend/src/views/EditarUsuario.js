@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import '../css/App.css';
+import '../css/EditarUsuario.css';
 import Header from './partials/Header.js';
 import Sidebar from './partials/Sidebar.js';
 

@@ -19,11 +19,12 @@
   padding: 0 5px 0 10px;
 }
 
-label {
+.involve-input label {
   display: flex;
   align-content: center;
   align-items: center;
   flex-wrap: nowrap;
+
 }
 
 select {
@@ -39,10 +40,10 @@ select {
   outline: none;
   cursor: pointer;
   margin-right: 20px;
-  width: 130px;
+  width: 155px;
 }
 
-#editBtn,
+#addUser,
 #backButton {
   background-color: white;
   border: none;

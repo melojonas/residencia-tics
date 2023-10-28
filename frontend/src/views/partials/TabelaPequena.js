@@ -5,10 +5,10 @@ function TabelaPequena({ alunos }) {
     return (
         <div className="responsive-table">
             {alunos.map((aluno) => (
-                <table key={aluno.id} className="aluno-item">
+                <table key={aluno._id} className="aluno-item">
                     <tbody>
                         <tr>
-                            <th colspan="2" className="student-name"><Link to={`/anotacoes/${aluno.id}`}>{aluno.nome}</Link></th>
+                            <th colspan="2" className="student-name"><Link to={`/anotacoes/${aluno._id}`}>{aluno.name}</Link></th>
                         </tr>
                         <tr>
                             <th>Teste</th>

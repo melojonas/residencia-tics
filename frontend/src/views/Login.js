@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/auth';
 import '../css/App.css';
 import '../css/Login.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -15,7 +16,9 @@ const api = axios.create({
 
 function Login() {
     
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    // TODO: Inserir o contexto de autenticação
 
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
@@ -28,8 +31,8 @@ function Login() {
         console.log(response.data);
         localStorage.setItem('nome', `${dados.user.name}`);
         localStorage.setItem('email', `${dados.user.email}`);  
-        navigate('/Home')})
-        .catch((error) =>{console.log(error)})};
+        navigate('/home');
+    }).catch((error) =>{console.log(error)})};
 
     return (
         <div className="container">

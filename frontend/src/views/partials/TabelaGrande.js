@@ -15,11 +15,11 @@ function TabelaGrande({ alunos }) {
             </thead>
             <tbody>
                 {alunos.map((aluno) => (
-                    <tr key={aluno.id}>
-                        <td><Link to={`/anotacoes/${aluno.id}`}>{aluno.nome}</Link></td>
+                    <tr key={aluno._id}>
+                        <td><Link to={`/anotacoes/${aluno._id}`}>{aluno.name}</Link></td>
                         <td><input type="text" className="nota-trabalho" value={aluno.teste} /></td>
                         <td><input type="text" className="ponto-extra" value={aluno.extra} /></td>
-                        <td><span className="media-bimestre">{aluno.media}</span></td>
+                        <td><input type="text" className="ponto-extra" value={aluno.media}/></td>
                     </tr>
                 ))}
             </tbody>

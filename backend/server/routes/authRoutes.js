@@ -6,7 +6,6 @@ const { log } = require('winston');
 
 const router = express.Router();
 
-
 router.post('/login', function(req, res, next) {
     console.log(req.body);
 
@@ -20,12 +19,7 @@ router.post('/login', function(req, res, next) {
     }
 });
 
-router.get('/returndatatoken', (req, res) => {
-    authController.returnDataToken(req, res)
-});
-
 router.post('/cadastro', (req, res) => {
-    console.log(req.body);
     userController.createUser(req,res);
 });
 

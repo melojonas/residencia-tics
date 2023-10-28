@@ -78,7 +78,7 @@ function AdicionarUsuario() {
                             </select>
                         </div>
                         <div className='involve-input'>
-                            <label>E-mail:</label>
+                            <label style={{ width: '60px'}}>E-mail:</label>
                             <input className='addInput' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
                         <div className='involve-input'>

@@ -42,7 +42,7 @@
     width: 130px;
   }
   
-  #addUser,
+  #editBtn,
   #backButton {
     background-color: white;
     border: none;
