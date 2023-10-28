@@ -5,7 +5,7 @@ const app = express();
 const mongodb = require('mongodb');
 const {connect} = require('./database');
 const bodyparser = require('body-parser');
-const cookieparser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -42,21 +42,28 @@ app.use(
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__root + '/client/src/views'));
+app.use(cors( { origin: 'http://localhost:3000', credentials: true }));
 app.use(flash());
-app.use(cors());
 app.use(helmet());
 app.use(morgan('dev')); // TODO: Mudar para 'combined' em produção
 app.use(bodyparser.json( { extended: true } ));
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(cookieparser());
+app.use(cookieParser());
 app.use(express.static(path.join(__root + '/client/public')));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // TODO: Mudar para o domínio do frontend em produção
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 /* ROTAS */
 
 // Rota para home
 app.use('/', indexRoutes);
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/users', userRoutes);
 
 /* ERROR HANDLER */

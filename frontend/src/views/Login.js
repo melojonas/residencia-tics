@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from '../context/auth';
+
 import '../css/App.css';
 import '../css/Login.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -10,35 +10,27 @@ import facebook from '../img/facebook-logo.svg';
 import google from '../img/google-logo.png';
 import microsoft from '../img/microsoft-logo.svg';
 
-const api = axios.create({
-    baseURL: 'http://localhost:8080'
-});
-
 function Login() {
-    
-    const navigate = useNavigate();
 
-    // TODO: Inserir o contexto de autenticação
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
 
-    function LoginUsuario(){
-        api.post("http://localhost:8080/auth/login", {
-          email,
-          password
-    }).then((response) => { let dados = response.data; 
-        console.log(response.data);
-        localStorage.setItem('nome', `${dados.user.name}`);
-        localStorage.setItem('email', `${dados.user.email}`);  
-        navigate('/home');
-    }).catch((error) =>{console.log(error)})};
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        await login(email, password);
+        navigate(from, { replace: true })
+    };
 
     return (
         <div className="container">
             <div className="container-login" style={{ backgroundImage: 'url(/img/background.jpg)' }}>
                 <div className="wrap-login">
-                    <form className="login-form validate-form" method="POST" action="http://localhost:8080/auth/login">
+                    <form className="login-form validate-form" onSubmit={handleSubmit}>
                         <span className="login-form-logo">
                             <i className="zmdi zmdi-landscape"></i>
                         </span>
@@ -63,12 +55,12 @@ function Login() {
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="text" name="email" placeholder="Usuário" onChange={(event) => SetNewEmail(event.target.value)} />
+                            <input className="input" type="text" name="email" placeholder="Usuário" value={email} onChange={(event) => SetNewEmail(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="password" name="password" placeholder="Senha" onChange={(event) => SetNewPw(event.target.value)} />
+                            <input className="input" type="password" name="password" placeholder="Senha" value={password} onChange={(event) => SetNewPw(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf191;"></span>
                         </div>
 
@@ -80,7 +72,7 @@ function Login() {
                         </div>
 
                         <div className="container-login-form-btn">
-                            <button type="button" onClick={LoginUsuario} className="login-form-btn">
+                            <button type="submit" className="login-form-btn">
                                 Login
                             </button>
                         </div>

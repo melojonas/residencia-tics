@@ -28,7 +28,6 @@ const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        console.log(process.env.JWT_TOKEN)
         const token = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWT_SECRET);
 
         // Set the token as a cookie
@@ -45,7 +44,14 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
     // Limpar o cookie de autenticação
-    res.clearCookie('t');
+    res.clearCookie('t', path='/', domain='localhost', secure=false, httpOnly=true);
+
+    if (!req.cookies.t) {
+        return res.status(401).json({
+            error: 'Não autorizado'
+        });
+    }
+
     return res.json({ message: 'Deslogado com sucesso' });
 };
 

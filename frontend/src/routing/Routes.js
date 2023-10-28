@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import RequireAuth from '../views/partials/RequireAuth';
+
 import Administracao from '../views/Administracao';
 import Anotacoes from '../views/Anotacoes';
 import Avaliacoes from '../views/Avaliacoes';
@@ -14,22 +16,24 @@ import EditarUsuario from '../views/EditarUsuario';
 
 function AppRoutes() {
     return (
-        <Router>
+        <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/administracao" element={<Administracao />} />
-                <Route path="/avaliacoes" element={<Avaliacoes />} />
-                <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/requesttoken" element={<RequestToken />} />
                 <Route path="/verifytoken" element={<VerifyToken />} />
-                <Route path="/presenca" element={<Presenca />} />
-                <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
-                <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
-                <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
+
+                <Route element={<RequireAuth />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/administracao" element={<Administracao />} />
+                    <Route path="/avaliacoes" element={<Avaliacoes />} />
+                    <Route path="/presenca" element={<Presenca />} />
+                    <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
+                    <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
+                    <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
+                </Route>
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
 
