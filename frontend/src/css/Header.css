@@ -30,7 +30,6 @@
 .mobile-menu-button {
     position: absolute;
     left: 40px;
-    top: 29px;
 }
 
 #menu-toggle{
@@ -39,4 +38,33 @@
     padding: 0;
     font-size: 25px;
     cursor: pointer;
+}
+
+.header-logo {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+}
+
+.dropdown-menu button {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.header-logo:hover .dropdown-menu {
+    display: block;
 }

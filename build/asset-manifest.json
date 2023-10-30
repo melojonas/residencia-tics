@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.548738ba.css",
+    "main.js": "/static/js/main.1c829552.js",
+    "static/js/47.c4ce802f.chunk.js": "/static/js/47.c4ce802f.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/background.jpg": "/static/media/background.e779302860d90568b90c.jpg",
+    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.1c701c9a6b587802e3d0.ttf",
+    "static/media/Poppins-Medium.ttf": "/static/media/Poppins-Medium.b59f6a636397975c5409.ttf",
+    "static/media/Poppins-SemiBold.ttf": "/static/media/Poppins-SemiBold.5981b450a68d5134225b.ttf",
+    "static/media/Poppins-Bold.ttf": "/static/media/Poppins-Bold.e2abc8f5e9a67ea669ea.ttf",
+    "static/media/perfil-logo.png": "/static/media/perfil-logo.aa774da06a53b5441b25.png",
+    "static/media/Material-Design-Iconic-Font.ttf?v=2.2.0": "/static/media/Material-Design-Iconic-Font.5a588d6a8bfc41d69f88.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/google-logo.png": "/static/media/google-logo.a6a557bec05fc14ff631.png",
+    "static/media/Material-Design-Iconic-Font.woff?v=2.2.0": "/static/media/Material-Design-Iconic-Font.bd9b02bf1131d90bfe22.woff",
+    "static/media/Material-Design-Iconic-Font.woff2?v=2.2.0": "/static/media/Material-Design-Iconic-Font.6ee80f4bf5d3f92f3bf7.woff2",
+    "index.html": "/index.html",
+    "static/media/facebook-logo.svg": "/static/media/facebook-logo.efe674b89e045edc06c3ebf07ab7c2af.svg",
+    "static/media/microsoft-logo.svg": "/static/media/microsoft-logo.72f0fcc793eda19cdc1604efc3b381cb.svg",
+    "main.548738ba.css.map": "/static/css/main.548738ba.css.map",
+    "main.1c829552.js.map": "/static/js/main.1c829552.js.map",
+    "47.c4ce802f.chunk.js.map": "/static/js/47.c4ce802f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.548738ba.css",
+    "static/js/main.1c829552.js"
+  ]
+}
