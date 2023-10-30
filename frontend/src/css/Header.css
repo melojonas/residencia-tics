@@ -48,14 +48,23 @@
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 0; 
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 10px;
-    display: none;
+    padding: 10px; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
 }
+
+.header-logo:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+}
+
 
 .dropdown-menu button {
     display: block;
@@ -63,8 +72,4 @@
     border: none;
     cursor: pointer;
     transition: background 0.2s;
-}
-
-.header-logo:hover .dropdown-menu {
-    display: block;
 }
