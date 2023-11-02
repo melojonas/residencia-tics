@@ -5,6 +5,7 @@ import '../css/App.css';
 import '../css/EditarUsuario.css';
 import Header from './partials/Header.js';
 import Sidebar from './partials/Sidebar.js';
+import axios from '../api/axios';
 
 function EditarUsuario() {
     const { userId } = useParams();
@@ -25,27 +26,55 @@ function EditarUsuario() {
 
     // Função para recuperar os dados do usuário (substitua com a lógica correta)
     const fetchUserData = (userId) => {
-        // Simulação de busca de dados do usuário com base no userId
-        const user = {
-            nome: 'Nome do Usuário',
-            matricula: 'Matrícula do Usuário',
-            funcao: 'Função do Usuário',
-            email: 'Email do Usuário',
-            telefone: '(99) 99999-9999',
-        };
-
-        // Preencher os estados com os dados do usuário a ser editado
-        setNome(user.nome);
-        setMatricula(user.matricula);
-        setFuncao(user.funcao);
-        setEmail(user.email);
-        setTelefone(user.telefone);
+        axios.get(`/api/users/user/${userId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        })
+        .then((response) => {
+            const data = response.data;
+            setNome(data.name);
+            setMatricula('1234567890');
+            setFuncao(data.role);
+            setEmail(data.email);
+            setTelefone('21999999999');
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     };
 
     // Função para lidar com a submissão do formulário de edição
-    const handleEditarUsuario = () => {
-        // Implementar a lógica para editar o usuário, por exemplo, fazer uma chamada à API
-        // com os dados atualizados (nome, matricula, funcao, email).
+    const handleEditarUsuario = (event) => {
+        event.preventDefault();
+
+        // Exemplo: Enviar os dados do formulário para a API ou banco de dados
+        // Substituir isso com a chamada à API ou banco de dados
+        const userData = {
+            name: nome,
+            // matricula: matricula,
+            role: funcao,
+            email: email,
+            // telefone: telefone
+        };
+
+        axios
+        .put(`/api/users/user/${userId}`, userData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
+        // Redirecionar para a lista de usuários
+        window.location.href = '/administracao';
     };
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -82,12 +111,12 @@ function EditarUsuario() {
                         </div>
                         <div className='involve-input'>
                             <label>Função:</label>
-                            <input
-                                className='addInput'
-                                type="text"
-                                value={funcao}
-                                onChange={(e) => setFuncao(e.target.value)}
-                            />
+                            <select defaultValue={funcao} value={funcao} onChange={(e) => setFuncao(e.target.value)} required>
+                                <option value="Discente">Discente</option>
+                                <option value="Docente">Docente</option>
+                                <option value="Coordenação">Coordenação</option>
+                                <option value="Administração">Administração</option>
+                            </select>
                         </div>
                         <div className='involve-input'>
                             <label>Email:</label>

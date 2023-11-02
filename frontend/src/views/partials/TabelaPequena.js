@@ -12,15 +12,15 @@ function TabelaPequena({ alunos }) {
                         </tr>
                         <tr>
                             <th>Teste</th>
-                            <td><input type="text" className="nota-trabalho" value={aluno.trabalho} /></td>
+                            <td><input type="text" className="nota-trabalho" value={"10.0"} /></td>
                         </tr>
                         <tr>
                             <th>Extra</th>
-                            <td><input type="text" className="ponto-extra" value={aluno.extra} /></td>
+                            <td><input type="text" className="ponto-extra" value={"5.0"} /></td>
                         </tr>
                         <tr>
                             <th>Conceito</th>
-                            <td><span className="media-bimestre">{aluno.media}</span></td>
+                            <td><span className="media-bimestre">{"7.5"}</span></td>
                         </tr>
                     </tbody>
                 </table>

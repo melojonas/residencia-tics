@@ -69,7 +69,7 @@ function Diario() {
     // Função para buscar a lista de alunos
     const fetchAlunos = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8080/users'); // Substitir pela rota da API
+            const response = await fetch('http://127.0.0.1:8080/api/users/discentes'); // Substitir pela rota da API
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados dos alunos');
             }

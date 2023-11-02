@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import '../css/App.css';
 import '../css/AdicionarUsuario.css';
 import Header from './partials/Header.js';
 import Sidebar from './partials/Sidebar.js';
+import axios from '../api/axios';
+
+// @GuilhermeASousa, precisamos colocar useRef para acessar os inputs do formulário.
+// Está dando erro no console do navegador, e não sei muito bem como resolver.
+//      Warning: findDOMNode is deprecated in StrictMode. findDOMNode was passed 
+//      an instance of InputElement which is inside StrictMode. Instead, add a ref 
+//      directly to the element you want to reference. Learn more about using refs 
+//      safely here: https://reactjs.org/link/strict-mode-find-node
 
 function AdicionarUsuario() {
+    const navigate = useNavigate();
 
     const [nome, setNome] = useState('');
     const [matricula, setMatricula] = useState('');
-    const [funcao, setFuncao] = useState('');
+    const [funcao, setFuncao] = useState('Discente');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
 
@@ -25,19 +34,16 @@ function AdicionarUsuario() {
         };
 
         // Send a POST request to the server with the new user data
-        fetch('http://localhost:8080/users/', {
-            method: 'POST',
+        axios
+        .post('/api/users', newUser,
+        { 
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newUser),
+            withCredentials: true
         })
         .then((response) => {
-            if (!response.ok) {
-                throw new Error('Erro ao adicionar usuário');
-            }
-            // Redirect the user back to the administration page after adding the user
-            window.location.href = '/administracao';
+            navigate('/administracao');
         })
         .catch((error) => {
             console.error(error);
@@ -70,7 +76,6 @@ function AdicionarUsuario() {
                         <div className='involve-input'>
                             <label>Função:</label>
                             <select value={funcao} onChange={(e) => setFuncao(e.target.value)} required>
-                                <option value="" disabled selected>Selecione:</option>
                                 <option value="Discente">Discente</option>
                                 <option value="Docente">Docente</option>
                                 <option value="Coordenação">Coordenação</option>

@@ -48,7 +48,7 @@ function Anotacoes() {
         const usuarioIdNumber = parseInt(usuarioId, 10);
 
         // Carrega o nome e o tipo do usuario com base no usuarioId
-        const usuarioEncontrado = usuarios.find((usuario) => usuario.id === usuarioIdNumber);
+        const usuarioEncontrado = usuarios.find((usuario) => usuario._id === usuarioIdNumber);
 
         if (usuarioEncontrado) {
             setusuarioNome(usuarioEncontrado.nome);

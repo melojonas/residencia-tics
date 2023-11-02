@@ -1,9 +1,6 @@
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-const { expressjwt } = require('express-jwt');
 const User = require('../models/User');
-const { json } = require('stream/consumers');
-const store = require('store');
 
 dotenv.config();
 
@@ -34,7 +31,6 @@ const login = async (req, res) => {
         res.cookie('t', token, { expire: new Date() + 9999 });
 
         //Return the response with the user and token
-        const { _id, name, email } = user;
         res.json({user: {_id : user._id, name: user.name, email: user.email}})
         
     } catch (error) {

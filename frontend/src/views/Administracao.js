@@ -4,6 +4,7 @@ import '../css/App.css';
 import '../css/Usuarios.css';
 import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
+import axios from '../api/axios';
 
 function Usuarios() {
 
@@ -13,8 +14,8 @@ function Usuarios() {
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8080/users'); // Substituir pela rota da API
-            const data = await response.json();
+            const response = await axios.get('/api/users');
+            const data = response.data;
             setUsers(data);
         } catch (error) {
             console.error('Erro ao buscar os dados do usuário:', error);
@@ -33,6 +34,23 @@ function Usuarios() {
     const handleAddUserClick = () => {
         // Implementar a lógica para adicionar um novo usuário
         console.log('Botão Adicionar Novo Usuário clicado');
+    };
+
+    const handleDeleteUserClick = (user_id) => {
+        // Alerta de confirmação
+        if (!window.confirm('Tem certeza que deseja excluir este usuário?')) { return; }
+
+        // Use Axios to send a DELETE request to the server
+        axios
+            .delete(`/api/users/${user_id}`)
+            .then((response) => {
+                // Atualizar a lista de usuários
+                fetchUserData();
+            })
+            .catch((error) => {
+                console.error('Erro ao excluir o usuário:', error);
+                // Tratar erros aqui
+            });        
     };
 
     const handleImportButtonClick = () => {
@@ -103,7 +121,7 @@ function Usuarios() {
             return true; // Mostrar apenas alunos
         } else if (activeTable === 'tabelaProfessores' && user.role === 'Docente') {
             return true; // Mostrar apenas professores
-        } else if (activeTable === 'tabelaFuncionarios' && user.role === 'Funcionário') {
+        } else if (activeTable === 'tabelaFuncionarios' && (user.role === 'Coordenação' || user.role === 'Administração')) {
             return true; // Mostrar apenas funcionários
         }
         return false; // Ocultar outros casos
@@ -175,7 +193,7 @@ function Usuarios() {
                                             <button className="btnEdit">
                                                 <Link style={{ color: 'black' }} to={`/editar-usuario/${user._id}`}>Editar</Link>
                                             </button>
-                                            <button className="btnDelete">Excluir</button>
+                                            <button className="btnDelete" onClick={() => handleDeleteUserClick(user._id)}>Excluir</button>
                                         </td>
                                     </tr>
                                 ))}

@@ -19,8 +19,6 @@ const ejs = require('ejs');
 
 dotenv.config();
 
-
-const indexRoutes = require(path.join(__dirname + '/routes/indexRoutes'));
 const authRoutes = require(path.join(__dirname + '/routes/authRoutes'));
 const userRoutes = require(path.join(__dirname + '/routes/userRoutes'));
 
@@ -62,9 +60,8 @@ app.use((req, res, next) => {
 /* ROTAS */
 
 // Rota para home
-app.use('/', indexRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 /* ERROR HANDLER */
 

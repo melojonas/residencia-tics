@@ -116,6 +116,16 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// Get only Discentes
+const listDiscentes = async (req, res) => {
+    try {
+        const users = await User.find({ role: "Discente" }).select('-hashed_password -__v');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     listUsers,
     createUser,
@@ -123,4 +133,5 @@ module.exports = {
     readUser,
     updateUser,
     deleteUser,
+    listDiscentes
 };
