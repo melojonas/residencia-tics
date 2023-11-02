@@ -13,6 +13,7 @@ import RequestToken from '../views/RequestToken';
 import VerifyToken from '../views/VerifyToken';
 import AdicionarUsuario from '../views/AdicionarUsuario';
 import EditarUsuario from '../views/EditarUsuario';
+import Calendario from '../views/Calendario';
 
 function AppRoutes() {
     return (
@@ -31,6 +32,7 @@ function AppRoutes() {
                     <Route path="/anotacoes/:usuarioId" element={<Anotacoes />} />
                     <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
                     <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
+                    <Route path="/calendario" element={<Calendario />} />
                 </Route>
             </Routes>
         </BrowserRouter>

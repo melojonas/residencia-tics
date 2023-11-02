@@ -13,7 +13,7 @@ function Sidebar({ isSidebarOpen }) {
                 <li><Link className='links' to="/administracao">Usuários</Link></li>
                 <li><Link className='links' to="/avaliacoes">Avaliações</Link></li>
                 <li><a className='links' href="#">Planejamento</a></li>
-                <li><a className='links' href="#">Calendário</a></li>
+                <li><Link className='links' to="/calendario">Calendário</Link></li>
                 <li><a className='links' href="#">Relatórios</a></li>
             </ul>
             
