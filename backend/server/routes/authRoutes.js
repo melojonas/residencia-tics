@@ -24,7 +24,7 @@ router.post('/cadastro', (req, res) => {
 });
 
 
-router.get('/logout', function(req, res, next) {
+router.post('/logout', function(req, res, next) {
     authController.logout(req, res);
 });
 

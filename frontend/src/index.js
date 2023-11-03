@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AppRoutes from './routing/Routes';
+import App from './App';
 import { AuthProvider } from './context/auth';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <AppRoutes />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AuthProvider>
   </React.StrictMode>,
 );

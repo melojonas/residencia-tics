@@ -1,6 +1,9 @@
-import React, { useState, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import AuthContext from '../context/auth';
+import { useDispatch } from "react-redux";
+
+import { authSuccess } from '../app/auth/authSlice';
+import { useLoginMutation } from '../app/auth/authAPI';
 
 import '../css/App.css';
 import '../css/Login.css';
@@ -12,18 +15,57 @@ import microsoft from '../img/microsoft-logo.svg';
 
 function Login() {
 
-    const { login } = useContext(AuthContext);
+    const [loginMutation, { isLoading, isError, error }] = useLoginMutation();
+    const userRef = useRef();
+    const errorRef = useRef();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    const [email, SetNewEmail] = useState('');
-    const [password, SetNewPw] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, []);
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [email, password]);  
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await login(email, password);
-        navigate(from, { replace: true })
+
+        try {
+            const data = await loginMutation({ email, password }).unwrap();
+            dispatch(authSuccess({ ...data }));
+            setEmail('');
+            setPassword('');
+            navigate(from, { replace: true });
+        } catch (err) {
+            if (!err.response) { setErrorMessage('Erro de conexão!'); }
+
+            switch (err.response?.status) {
+                case 401:
+                    setErrorMessage('Usuário ou senha inválidos!');
+                    break;
+                case 403:
+                    setErrorMessage('Usuário não ativado!');
+                    break;
+                case 404:
+                    setErrorMessage('Usuário não encontrado!');
+                    break;
+                case 500:
+                    setErrorMessage('Erro interno!');
+                    break;
+                default:
+                    setErrorMessage('Falha ao realizar login!');
+                    break;
+            }
+            if (errorRef.current) { errorRef.current.focus(); }
+        }
     };
 
     return (
@@ -55,12 +97,12 @@ function Login() {
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="text" name="email" placeholder="Usuário" value={email} onChange={(event) => SetNewEmail(event.target.value)} />
+                            <input className="input" type="text" name="email" placeholder="Usuário" ref={userRef} value={email} onChange={(event) => setEmail(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div className="wrap-input validate-input">
-                            <input className="input" type="password" name="password" placeholder="Senha" value={password} onChange={(event) => SetNewPw(event.target.value)} />
+                            <input className="input" type="password" name="password" placeholder="Senha" value={password} onChange={(event) => setPassword(event.target.value)} />
                             <span className="focus-input" data-placeholder="&#xf191;"></span>
                         </div>
 
@@ -86,6 +128,12 @@ function Login() {
                                 Ainda não tem uma conta? Cadastre-se
                             </a>
                         </div>
+
+                        {/* Error Message */}
+                        {errorMessage && <div className="error-message" ref={errorRef}>{errorMessage}</div>}
+
+                        {/* Loading */}
+                        {isLoading && <div className="loading">Carregando...</div>}
                     </form>
                 </div>
             </div>
