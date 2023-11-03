@@ -52,7 +52,7 @@ function Login() {
                     setErrorMessage('Usuário ou senha inválidos!');
                     break;
                 case 403:
-                    setErrorMessage('Usuário não ativado!');
+                    setErrorMessage('Usuário não autorizado!');
                     break;
                 case 404:
                     setErrorMessage('Usuário não encontrado!');
