@@ -33,7 +33,7 @@ function Login() {
 
     useEffect(() => {
         setErrorMessage('');
-    }, [email, password]);  
+    }, [email, password]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -113,6 +113,12 @@ function Login() {
                             </label>
                         </div>
 
+                        {/* Error Message */}
+                        {errorMessage && <div className="error-message" ref={errorRef}>{errorMessage}</div>}
+
+                        {/* Loading */}
+                        {isLoading && <div className="loading">Carregando...</div>}
+
                         <div className="container-login-form-btn">
                             <button type="submit" className="login-form-btn">
                                 Login
@@ -128,12 +134,6 @@ function Login() {
                                 Ainda não tem uma conta? Cadastre-se
                             </a>
                         </div>
-
-                        {/* Error Message */}
-                        {errorMessage && <div className="error-message" ref={errorRef}>{errorMessage}</div>}
-
-                        {/* Loading */}
-                        {isLoading && <div className="loading">Carregando...</div>}
                     </form>
                 </div>
             </div>

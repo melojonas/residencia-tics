@@ -50,7 +50,7 @@ function Usuarios() {
             .catch((error) => {
                 console.error('Erro ao excluir o usuário:', error);
                 // Tratar erros aqui
-            });        
+            });
     };
 
     const handleImportButtonClick = () => {
@@ -174,7 +174,7 @@ function Usuarios() {
                     </header>
                     <section id="user-list">
                         <h2>Lista de Usuários</h2>
-                        <table id={activeTable}>
+                        <table className='large-screen' id={activeTable}>
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -199,6 +199,34 @@ function Usuarios() {
                                 ))}
                             </tbody>
                         </table>
+                        <div className="responsive-table">
+                            {filteredUsers.map((user) => (
+                                <table key={user._id} className="aluno-item">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2" className="student-name"><Link to={`/anotacoes/${user._id}`}>{user.name}</Link></th>
+                                        </tr>
+                                        <tr>
+                                            <th>Função</th>
+                                            <td>{user.role}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{user.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ações</th>
+                                            <td>
+                                                <button className="btnEdit">
+                                                    <Link style={{ color: 'black' }} to={`/editar-usuario/${user._id}`}>Editar</Link>
+                                                </button>
+                                                <button className="btnDelete" onClick={() => handleDeleteUserClick(user._id)}>Excluir</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            ))}
+                        </div>
                         <button id="btnAddUser">
                             <Link style={{ color: 'black' }} to="/adicionar-usuario">Adicionar Novo Usuário</Link>
                         </button>
