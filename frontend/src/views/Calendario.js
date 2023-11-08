@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Link } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -12,7 +13,19 @@ moment.locale('pt-br');
 
 const localizer = momentLocalizer(moment);
 
+const customMessages = {
+    today: 'Atual',
+    next: 'Próximo',
+    previous: 'Anterior',
+    month: 'Mês',
+    week: 'Semana',
+    day: 'Dia',
+    showMore: total => `+${total} mais`,
+};
+
 function Calendario() {
+
+    const [eventos, setEventos] = useState([]); // Estado para armazenar eventos
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -26,19 +39,19 @@ function Calendario() {
                 <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
                 <main className="content">
                     <h1>Calendário</h1>
-                    <Calendar style={{height: '720px'}}
+
+                    <Calendar
+                        style={{ height: '720px' }}
                         localizer={localizer}
-                        events={[
-                            {
-                                title: 'Evento 1',
-                                start: new Date(2023, 10, 20),
-                                end: new Date(2023, 10, 22),
-                            },
-                            // Adicionar mais eventos conforme necessário
-                        ]}
+                        events={eventos} // Passa a lista de eventos para o calendário
                         startAccessor="start"
                         endAccessor="end"
+                        messages={customMessages}
                     />
+                    
+                    <button className='btnAddEvent'>
+                        <Link to="/criar-evento">Criar Evento</Link>
+                    </button>
                 </main>
             </div>
         </div>

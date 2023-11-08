@@ -15,13 +15,14 @@ import AdicionarUsuario from './views/AdicionarUsuario';
 import EditarUsuario from './views/EditarUsuario';
 import Calendario from './views/Calendario';
 import Layout from './views/Layout';
+import CriarEvento from './views/CriarEvento';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/requesttoken" element={<RequestToken />} />
@@ -36,6 +37,7 @@ function App() {
                         <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
                         <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
                         <Route path="/calendario" element={<Calendario />} />
+                        <Route path="/criar-evento" element={<CriarEvento />} />
                     </Route>
                 </Route>
             </Routes>
