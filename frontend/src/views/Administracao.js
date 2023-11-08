@@ -42,7 +42,7 @@ function Usuarios() {
 
         // Use Axios to send a DELETE request to the server
         axios
-            .delete(`/api/users/${user_id}`)
+            .delete(`/api/users/user/${user_id}`)
             .then((response) => {
                 // Atualizar a lista de usuários
                 fetchUserData();

@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/App.css';
 import '../css/Cadastro.css';
 import '../fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -9,36 +9,38 @@ import facebook from '../img/facebook-logo.svg';
 import google from '../img/google-logo.png';
 import microsoft from '../img/microsoft-logo.svg';
 
-const api = axios.create({
-    baseURL: 'http://localhost:8080'
-});
-
 function Cadastro() {
+    const navigate = useNavigate();
 
     const [email, SetNewEmail] = useState('');
     const [password, SetNewPw] = useState('');
     const [confirmPassword, SetConfirmPw] = useState('');
 
-    const handleCadastroClick = () => {
+    const handleCadastro = async (event) => {
+        event.preventDefault();
+
         if (password === confirmPassword) {
-            CriarUsuario();
+            axios
+                .post('/api/users', {
+                    email: email,
+                    password: password
+                })
+                .then((res) => {
+                    if (res.status === 200){ navigate('/login') }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
         } else {
             alert('As senhas não coincidem. Por favor, verifique.');
         }
-    };
-
-    function CriarUsuario() {
-        api.post("http://localhost:8080/cadastro", {
-            email,
-            password
-        }).then((response) => { console.log(response) }).catch((error) => { console.log(error) })
     };
 
     return (
         <div className="container">
             <div className="container-cadastro" style={{ backgroundImage: 'url(/img/background.jpg)' }}>
                 <div className="wrap-cadastro">
-                    <form className="cadastro-form validate-form" method="POST" action="http://localhost:8080/auth/cadastro">
+                    <form className="cadastro-form validate-form" method="POST" onSubmit={handleCadastro}>
                         <span className="cadastro-form-logo">
                             <i className="zmdi zmdi-landscape"></i>
                         </span>
@@ -97,15 +99,13 @@ function Cadastro() {
                         </div>
 
                         <div className="container-cadastro-form-btn">
-                            <button onClick={handleCadastroClick} className="cadastro-form-btn">
+                            <button className="cadastro-form-btn" type="submit">
                                 Cadastrar
                             </button>
                         </div>
 
                         <div className="text-center">
-                            <a className="txt1">
-                                <Link to="/Login">Já tem uma conta? Faça o login.</Link>
-                            </a>
+                            <Link className="txt1" to="/login">Já tem uma conta? Faça o login.</Link>
                         </div>
                     </form>
                 </div>

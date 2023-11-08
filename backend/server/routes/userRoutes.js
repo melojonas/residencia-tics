@@ -102,15 +102,14 @@ router.route('/')
  *       "updated": "2021-01-01T00:00:00.000Z",
  *     }
  */
+// Rotas para filtrar discentes
+router.route('/discentes')
+    .get(usersController.listDiscentes);
 
 router.route('/user/:user_id')
     .get(usersController.readUser)
     .put(usersController.updateUser)
     .delete(usersController.deleteUser);
-
-// Rotas para filtrar discentes
-router.route('/discentes')
-    .get(usersController.listDiscentes);
 
 // Middleware para buscar um usuário pelo ID e armazená-lo no objeto req
 router.param('user_id', usersController.getUserById);

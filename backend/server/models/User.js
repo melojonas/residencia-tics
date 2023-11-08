@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    unique: 'E-mail já cadastrado',
+    unique: true, // TODO: Unique não está funcionando, email duplicado é cadastrado
     match: [/.+\@.+\..+/, 'Por favor, preencha um e-mail válido'],
     required: 'E-mail é obrigatório'
   },
@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-});
+}, { collection: 'users' });
 
 UserSchema.pre('save', async function (next) {
   let user = this;

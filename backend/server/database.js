@@ -1,12 +1,12 @@
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
-const url = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
 
 const connect = async () => {
   
-  mongoose.connect('mongodb+srv://gestaoacademica-residenciaTICS:YLf!PLfGbt5RKFhhjk@cluster0.6wdhv8s.mongodb.net/gestaoacademica?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
   const db = mongoose.connection;
   db.on("error", () => {

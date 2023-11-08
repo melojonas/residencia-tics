@@ -21,7 +21,7 @@ const createUser = async (req, res, next) => {
 
     user.email = body.email;
     user.name = body.name || '';
-    user.role = body.role || 'discente';
+    user.role = body.role || 'Discente';
 
     if (body.password) {
         const salt = await bcrypt.genSalt(10);
@@ -61,6 +61,7 @@ const createUser = async (req, res, next) => {
         }); 
         
     } catch (err) {
+        console.log(err);
         res.status(400).json({ message: err.message });
     }
 };
@@ -112,6 +113,7 @@ const deleteUser = async (req, res) => {
         await user.deleteOne();
         res.json({ message: 'Usuário deletado.' });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
