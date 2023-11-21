@@ -16,6 +16,7 @@ import EditarUsuario from './views/EditarUsuario';
 import Calendario from './views/Calendario';
 import Layout from './views/Layout';
 import CriarEvento from './views/CriarEvento';
+import CriarQuestao from './views/CriarQuestao';
 
 function App() {
     return (
@@ -38,6 +39,8 @@ function App() {
                         <Route path="/editar-usuario/:userId" element={<EditarUsuario />} />
                         <Route path="/calendario" element={<Calendario />} />
                         <Route path="/criar-evento" element={<CriarEvento />} />
+                        <Route path="/criar-questao" element={<CriarQuestao />} />
+
                     </Route>
                 </Route>
             </Routes>
