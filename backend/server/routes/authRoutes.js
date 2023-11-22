@@ -16,4 +16,8 @@ router.post('/logout', function(req, res, next) {
     authController.logout(req, res);
 });
 
+router.post('/cadastro', function(req, res, next) {
+    userController.createUser(req, res);
+});
+
 module.exports = router;

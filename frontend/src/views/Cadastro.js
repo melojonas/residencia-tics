@@ -21,12 +21,12 @@ function Cadastro() {
 
         if (password === confirmPassword) {
             axios
-                .post('/api/users', {
+                .post('/auth/cadastro', {
                     email: email,
                     password: password
                 })
                 .then((res) => {
-                    if (res.status === 200){ navigate('/login') }
+                    if (res.status === 201){ navigate('/login') }
                 })
                 .catch((err) => {
                     console.error(err);
