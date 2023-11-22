@@ -3,6 +3,8 @@ const router = express.Router();
 const usersController = require('../controllers/usersController');
 const { isAuthorized, isAuthenticated } = require('../controllers/authController');
 
+router.use(isAuthenticated);
+
 // Create and List Users
 
 // Manual para front-end @GuilhermeASousa @rodrigosouza974

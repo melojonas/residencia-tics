@@ -6,82 +6,105 @@ dotenv.config();
 
 // Login function
 const login = async (req, res) => {
-    // Find the user by email
-    try {
-        const user = await User.findOne({ email: req.body.email });
-        if (!user) {
-            return res.status(401).json({
-                error: 'Usuário não encontrado'
-            });
-        }
+    const { email, password } = req.body;
 
-        // Authenticate the user
-        const authenticated = await user.authenticate(req.body.password);
+    // HTTP status 406: Not Acceptable
+    if (!email || !password) {
+        return res.status(406).json({ error: 'E-mail e senha são obrigatórios.' }); }
 
-        if (authenticated !== true) {
-            return res.status(401).json({
-                error: 'E-mail ou senha incorreta.'
-            });
-        }
+    // Procurar o usuário no banco de dados
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+        return res.status(401).json({ error: 'E-mail ou senha incorreta.' }); }
 
-        // Generate a JWT token
-        const accessToken = jwt.sign({ _id: user._id, nome: user.nome }, process.env.JWT_SECRET);
+    // Verificar se a senha está correta
+    const authenticated = await user.authenticate(req.body.password);
 
-        // Set the token as a cookie
-        res.cookie('t', accessToken, { expire: new Date() + 9999 });
+    if (authenticated !== true) {
+        return res.status(401).json({ error: 'E-mail ou senha incorreta.' }); }
 
-        //Return the response with the user and token
+    // Generate a JWT tokens
+    const accessToken = jwt.sign({
+        "email": user.email,
+        "role": user.role
+    }, process.env.JWT_ACCESS_SECRET, { expiresIn: '8h' });
+
+    const refreshToken = jwt.sign(
+        { "email": user.email },
+        process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' }
+    );
+
+    // Cookie seguro para o refresh token
+    res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 dias
+    });
+
+    // Return com o token de acesso e o usuário. IMPORTANTE: mesmo nome de variável do frontend.
+    res.status(200).json({accessToken, user: {_id : user._id, name: user.name, email: user.email}})
+};
+
+// Refresh token function
+const refresh = (req, res) => {
+    const cookies = req.cookies;
+
+    if (!cookies?.refreshToken) { return res.status(401).json({ error: 'Não autorizado' }); }
+
+    const refreshToken = cookies.refreshToken;
+
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
+        if (err) { return res.status(401).json({ error: 'Não autorizado' }); }
+
+        const user = User.findOne({ email: decoded.email });
+
+        if (!user) { return res.status(401).json({ error: 'Não autorizado' }); }
+
+        const accessToken = jwt.sign({
+            "email": user.email,
+            "role": user.role
+        }, process.env.JWT_ACCESS_SECRET, { expiresIn: '8h' });
+
         res.status(200).json({accessToken, user: {_id : user._id, name: user.name, email: user.email}})
-        
-    } catch (error) {
-        console.error(error) 
-    }
+    });
 };
 
 const logout = (req, res) => {
-    // Limpar o cookie de autenticação
-    res.clearCookie('t', path='/', domain='localhost', secure=false, httpOnly=true);
-
-    if (!req.cookies.t) {
-        return res.status(401).json({
-            error: 'Não autorizado'
-        });
-    }
-
-    return res.json({ message: 'Deslogado com sucesso' });
+    const cookies = req.cookies;
+    if (!cookies?.refreshToken) return res.status(204);
+    res.clearCookie('refreshToken', { httpOnly: true, secure: true, sameSite: 'none' });
+    res.status(200).json({ message: 'Logout realizado com sucesso.' });
 };
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
-    var token = req.cookies.t;
+    const authHeader = req.headers.authorization || req.headers.Authorization;
 
-    if (!token) {
-        return res.redirect('/auth/login');
-    }
+    if (!authHeader?.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Não autorizado.' }); }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.redirect('/auth/login');
-        }
-        req.auth = decoded;
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
+        if (err) { return res.status(401).json({ error: 'Não autorizado.' }); }
+
+        req.email = decoded.email;
+        req.role = decoded.role;
         next();
     });
 };
 
 // Authorization middleware
 const isAuthorized = (req, res, next) => {
-    const user = req.profile && req.auth && req.profile._id == req.auth._id;
-    if (!user) {
-        return res.status(403).json({
-            error: 'Acesso negado.'
-        });
-    }
     next();
 };
 
 
 module.exports = {
     login,
+    refresh,
     logout,
     isAuthenticated,
     isAuthorized

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { authSuccess } from '../app/auth/authSlice';
-import { useLoginMutation } from '../app/auth/authAPI';
+import { useLoginMutation } from '../app/auth/authApi';
 
 import '../css/App.css';
 import '../css/Login.css';

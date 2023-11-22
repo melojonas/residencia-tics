@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import '../../css/Header.css';
 import logo from '../../img/perfil-logo.png';
 import { userSelector, logout } from '../../app/auth/authSlice';
-import { useLogoutMutation } from '../../app/auth/authAPI';
+import { useLogoutMutation } from '../../app/auth/authApi';
 
 
 function Header({ toggleSidebar }) {

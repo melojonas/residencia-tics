@@ -14,7 +14,7 @@ function Usuarios() {
     // Simula a busca de dados do usuário
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('/api/users');
+            const response = await axios.get('/users');
             const data = response.data;
             setUsers(data);
         } catch (error) {

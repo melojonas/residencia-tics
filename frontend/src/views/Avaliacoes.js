@@ -5,6 +5,7 @@ import Header from './partials/Header';
 import Sidebar from './partials/Sidebar';
 import TabelaGrande from './partials/TabelaGrande';
 import TabelaPequena from './partials/TabelaPequena';
+import axios from '../api/axios';
 
 function Diario() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -13,82 +14,24 @@ function Diario() {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
-    const [alunos, setAlunos] = useState([
-        {
-            id: 1,
-            nome: 'Guilherme de Albuquerque Sousa',
-            prova: '8.5',
-            trabalho: '9.0',
-            extra: '1.0',
-            recuperacao: '7.5',
-            media: '8.0',
-            frequencia: '95%',
-        },
-        {
-            id: 2,
-            nome: 'Rodrigo Souza Lopes de Andrade',
-            prova: '8.5',
-            trabalho: '9.0',
-            extra: '1.0',
-            recuperacao: '7.5',
-            media: '8.0',
-            frequencia: '95%',
-        },
-        {
-            id: 3,
-            nome: 'Murilo de Medeiros Viana',
-            prova: '8.5',
-            trabalho: '9.0',
-            extra: '1.0',
-            recuperacao: '7.5',
-            media: '8.0',
-            frequencia: '95%',
-        },
-        {
-            id: 4,
-            nome: 'João Henrique Valente Pereira',
-            prova: '8.5',
-            trabalho: '9.0',
-            extra: '1.0',
-            recuperacao: '7.5',
-            media: '8.0',
-            frequencia: '95%',
-        },
-        {
-            id: 5,
-            nome: 'Jonas da Silva Melo',
-            prova: '8.5',
-            trabalho: '9.0',
-            extra: '1.0',
-            recuperacao: '7.5',
-            media: '8.0',
-            frequencia: '95%',
-        },
-    ]);
+    const [alunos, setAlunos] = useState([]);
 
     // Função para buscar a lista de alunos
     const fetchAlunos = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:8080/api/users/discentes'); // Substitir pela rota da API
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados dos alunos');
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Erro ao buscar dados dos alunos:', error);
-            throw error;
-        }
+        axios
+            .get('/users/discentes')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     useEffect(() => {
-        fetchAlunos()
-            .then((alunosData) => {
-                setAlunos(alunosData);
-            })
-            .catch((error) => {
-                // Lidar com erros aqui
-            });
+        fetchAlunos().then((alunos) => {
+            setAlunos(alunos);
+        });
     }, []);
 
     return (

@@ -17,9 +17,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
 
     if (result.error && result.error.status === 401) {
-        const refreshResult = await baseQuery('/refreshToken', api, extraOptions) // try to get a new token
+        const refreshResult = await baseQuery('/auth/refresh', api, extraOptions) // try to get a new token
 
-        if (refreshResult?.data) {
+        // Check for 200 or 204 status codes
+        if (refreshResult.status === 200) {
             api.dispatch(authSuccess(refreshResult.data)) // store the new token
             result = await baseQuery(args, api, extraOptions) // retry the initial query
         } else {
@@ -30,7 +31,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 }
 
 export const apiSlice = createApi({
-    baseQuery: baseQuery,
+    baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
     }),
     overrideExisting: false,
